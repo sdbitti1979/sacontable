@@ -3,15 +3,23 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" data-mdb-collapse-initialized="true">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action py-2 inicio nav-link {{ request()->is('dashboard') ? 'active' : '' }}" data-mdb-ripple-init=""
-                    aria-current="true">
+                <a href="{{ route('dashboard') }}"
+                    class="list-group-item list-group-item-action py-2 inicio nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
+                    data-mdb-ripple-init="" aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Inicio</span>
                 </a>
-                <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}" data-mdb-ripple-init="">
+                <a href="{{ route('usuarios') }}"
+                    class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}"
+                    data-mdb-ripple-init="">
                     <!--<i class="fas fa-chart-area fa-fw me-3"></i>-->
                     <i class="fas fa-users fa-fw me-3"></i>
                     <span>Usuarios </span>
                 </a>
+                <a href="{{ route('configuracion') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('configuracion') ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-cogs"></i>
+                    <span>Configuración</span>
+                </a>
+
                 <!--<a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
                         class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>
                 <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
@@ -68,24 +76,24 @@
                         <i class="fas fa-bell"></i>
                         <span class="badge rounded-pill badge-notification bg-danger">1</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <!--<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Some news</a></li>
                         <li><a class="dropdown-item" href="#">Another news</a></li>
                         <li>
                             <a class="dropdown-item" href="#">Something else</a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </li>
 
                 <!-- Icon -->
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link me-3 me-lg-0" href="#">
                         <i class="fas fa-fill-drip"></i>
                     </a>
-                </li>
+                </li>-->
                 <!-- Icon -->
                 <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="https://sdbitti1979.github.io/sacontable/" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
                 </li>
@@ -135,8 +143,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
                         id="navbarDropdownMenuLink" role="button" data-mdb-dropdown-init aria-expanded="false">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                            height="22" alt="" loading="lazy" />
+                        <i class="fas fa-user-circle fa-lg"></i>
+                        <!--<img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
+                            height="22" alt="" loading="lazy" />-->
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Mi cuenta</a></li>

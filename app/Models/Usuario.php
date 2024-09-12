@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Authenticatable
@@ -36,7 +37,11 @@ class Usuario extends Authenticatable
 
     public function listarUsuarios()
     {
-        return DB::table('usuarios')->orderBy('idusuario');
+        return DB::table('usuarios')
+                ->leftJoin('roles', 'usuarios.idrol', '=', 'roles.idrol') // LEFT JOIN con la tabla 'roles'
+                ->select('usuarios.*', 'roles.descripcion as rol_nombre')
+                ->orderBy('idusuario');
+        
     }
 
     public function insertarUsuario($validated)

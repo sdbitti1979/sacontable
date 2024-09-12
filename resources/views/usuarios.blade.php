@@ -1,6 +1,11 @@
 @extends('app')
 
 @section('content')
+    <style>
+        .container{
+            max-width: 100% !important;
+        }
+    </style>
     <!-- Scripts -->
 
     <script type="text/javascript">
@@ -42,6 +47,10 @@
                     {
                         data: 'email',
                         name: 'email'
+                    },
+                    {
+                        data: 'rol_nombre',
+                        name: 'rol_nombre'
                     },
                     {
                         data: 'edit',
@@ -281,6 +290,7 @@
                                         <th>Apellido</th>
                                         <th>Nombre</th>
                                         <th>Email</th>
+                                        <th>Rol</th>
                                         <th>Editar</th>
                                         <th>Eliminar</th>
                                     </tr>
@@ -298,16 +308,16 @@
 
         <!--Section: Sales Performance KPIs-->
         <!--<section class="mb-4">
-                                    <div class="card">
-                                        <div class="card-header text-center py-3">
-                                            <h5 class="mb-0 text-center">
-                                                <strong>Sales Performance KPIs</strong>
-                                            </h5>
-                                        </div>
-                                        <div class="card-body">
+                                        <div class="card">
+                                            <div class="card-header text-center py-3">
+                                                <h5 class="mb-0 text-center">
+                                                    <strong>Sales Performance KPIs</strong>
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
 
-                                        </div>
-                                </section>-->
+                                            </div>
+                                    </section>-->
         <!--Section: Sales Performance KPIs-->
 
 

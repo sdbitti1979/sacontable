@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ConfiguracionController;
 
 //Route::view('/', 'welcome');
 Route::view('login', 'login')->name('login')->middleware('guest');
@@ -21,6 +22,8 @@ Route::post('/usuarios.editarUsuario', [UsuariosController::class, 'editarUsuari
 Route::post('/usuarios.guardarUsuario', [UsuariosController::class, 'guardarUsuario'])->name('usuarios.guardarUsuario');
 Route::post('/usuarios.actualizarUsuario', [UsuariosController::class, 'actualizarUsuario'])->name('usuarios.actualizarUsuario');
 Route::post('/usuarios/eliminar', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+
+Route::get('/configuracion', [ConfiguracionController::class, 'configuracion'])->name('configuracion');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

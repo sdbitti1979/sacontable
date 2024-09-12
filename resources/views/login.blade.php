@@ -1,9 +1,6 @@
 @extends('app')
 
-@section('content')
-    <style>
-       
-    </style>
+@section('content')    
     <script type="text/javascript">
         $(document).ready(function($) {
             $("#email").focus();

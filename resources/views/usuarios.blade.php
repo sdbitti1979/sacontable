@@ -4,12 +4,13 @@
     <!-- Scripts -->
 
     <script type="text/javascript">
-        var table = null;
+        var table;
         $(document).ready(function($) {
 
             table = $('#myTable').DataTable({
                 processing: true,
                 serverSide: true,
+                orderable: false,
                 ajax: {
                     url: "{{ route('usuarios.data') }}", // Ruta del controlador
                     type: "POST", // Cambiar el método a POST
@@ -54,7 +55,27 @@
                         orderable: false,
                         searchable: false
                     }
-                ]
+                ],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
             });
 
             setInterval(function() {
@@ -229,7 +250,7 @@
         }
     </script>
 
-     <main style="margin-top: 58px">
+    <main style="margin-top: 58px">
         <div class="container pt-4">
             <!-- Section: Main chart -->
             <section class="mb-4">
@@ -277,16 +298,16 @@
 
         <!--Section: Sales Performance KPIs-->
         <!--<section class="mb-4">
-                        <div class="card">
-                            <div class="card-header text-center py-3">
-                                <h5 class="mb-0 text-center">
-                                    <strong>Sales Performance KPIs</strong>
-                                </h5>
-                            </div>
-                            <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header text-center py-3">
+                                            <h5 class="mb-0 text-center">
+                                                <strong>Sales Performance KPIs</strong>
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
 
-                            </div>
-                    </section>-->
+                                        </div>
+                                </section>-->
         <!--Section: Sales Performance KPIs-->
 
 

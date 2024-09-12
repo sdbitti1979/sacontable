@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <style>
     .navbar-dark .nav-item .nav-link {
@@ -25,27 +25,7 @@
         myModal.hide();
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los enlaces del menú
-        var links = document.querySelectorAll('.list-group-item');
-
-        // Agrega un evento click a cada enlace
-        links.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // Previene la acción por defecto del enlace
-                // Elimina la clase 'active' de todos los enlaces
-                links.forEach(function(link) {
-                    link.classList.remove('active');
-                });
-
-                // Agrega la clase 'active' al enlace clicado
-                this.classList.add('active');
-
-                // Opcional: Navegar al enlace si lo deseas
-                window.location.href = this.href;
-            });
-        });
-    });
+    
    
 </script>
 
@@ -83,8 +63,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 
     <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/mdb.min.css', 'resources/css/admin.css', 'resources/js/mdb.umd.min.js'])
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>    
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 
+    'resources/css/mdb.min.css', 'resources/css/admin.css', 'resources/js/mdb.umd.min.js'])
 </head>
 
 <body>
@@ -92,12 +73,15 @@
     <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Mi Aplicación</a>
     </nav>-->
+    @if(!request()->routeIs('login'))
     <div class="bd-example">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             @include('nav')
         </nav>
     </div>
-    <div class="container">
+    @endif
+    
+    <div class="container" id="content">
         <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')
     </div>

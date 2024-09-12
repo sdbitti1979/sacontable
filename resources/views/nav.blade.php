@@ -1,17 +1,13 @@
-<script>
-   
-</script>
-
 <header>
 
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" data-mdb-collapse-initialized="true">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
-                <a href="./dashboard" class="list-group-item list-group-item-action py-2 active" data-mdb-ripple-init=""
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action py-2 inicio nav-link {{ request()->is('dashboard') ? 'active' : '' }}" data-mdb-ripple-init=""
                     aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Inicio</span>
                 </a>
-                <a href="./usuarios" class="list-group-item list-group-item-action py-2 " data-mdb-ripple-init="">
+                <a href="{{ route('usuarios') }}" class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}" data-mdb-ripple-init="">
                     <!--<i class="fas fa-chart-area fa-fw me-3"></i>-->
                     <i class="fas fa-users fa-fw me-3"></i>
                     <span>Usuarios </span>
@@ -54,15 +50,14 @@
 
             <!-- Brand -->
             <a class="navbar-brand" href="#">
-                <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25" alt=""
-                    loading="lazy" />
+                <img src="{{ asset('img/logo2.png') }}" height="25" alt="" loading="lazy" />
             </a>
             <!-- Search form -->
-            <form class="d-none d-md-flex input-group w-auto my-auto">
+            <!--<form class="d-none d-md-flex input-group w-auto my-auto">
                 <input autocomplete="off" type="search" class="form-control rounded"
                     placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px" />
                 <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-            </form>
+            </form>-->
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -144,9 +139,9 @@
                             height="22" alt="" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">My profile</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li><a class="dropdown-item" href="./logout">Salir</a></li>
                     </ul>
                 </li>
             </ul>

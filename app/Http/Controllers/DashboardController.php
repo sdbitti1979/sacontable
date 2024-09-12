@@ -8,8 +8,5 @@ class DashboardController extends Controller
 {
     public function dashboard(){
 
-        var_dump("dash");
-        die();
-        //return redirect()->route('dashboard');
-    }
-}
+       return view('dashboard');
+    }}

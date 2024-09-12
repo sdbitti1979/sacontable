@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,10 @@ class AuthController extends Controller
 
         if ($user && Hash::check($request->password, $user->clave)) {
             Auth::loginUsingId($user->idusuario);
-    
+            // Obtener la fecha y hora actual en una zona horaria específica
+            $currentTime = Carbon::now('America/Argentina/Buenos_Aires');
+            DB::table('usuarios')->where('idusuario', $user->idusuario)->update(['ultimo_inicio_sesion' => $currentTime]);
+
             return redirect()->route('dashboard');
         }
        

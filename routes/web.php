@@ -8,11 +8,11 @@ use App\Http\Controllers\UsuariosController;
 
 //Route::view('/', 'welcome');
 Route::view('login', 'login')->name('login')->middleware('guest');
-Route::view('dashboard', 'dashboard')->middleware('auth');
+//Route::view('dashboard', 'dashboard')->middleware('auth');
 
 Route::get('/showLoginForm', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/validatelogin', [AuthController::class, 'validateLogin'])->name('validatelogin');
-Route::post('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/usuarios', [UsuariosController::class, 'usuarios'])->name('usuarios');
 Route::post('/usuarios.data', [UsuariosController::class, 'usuariospaginado'])->name('usuarios.data');

@@ -88,7 +88,7 @@ class UsuariosController extends Controller
             'cuil' => 'nullable|string|max:11', // Si es opcional
         ]);
 
-       
+      
         $UsuarioM = new Usuario();
         $usuario = $UsuarioM->dameUsuarioPorId($request->id);      
         $UsuarioM->actualizarUsuario($validated, $usuario);

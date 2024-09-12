@@ -53,9 +53,13 @@ class Usuario extends Authenticatable
         ]);
     }
 
-    public function actualizarUsuario($validated,  $usuario){
+    public function actualizarUsuario($validated,  $usuario)
+    {
 
-        Usuario::update([
+        $usuario = Usuario::findOrFail($usuario->idusuario);
+
+        // Actualizar los campos del usuario
+        $usuario->update([
             'usuario' => $validated['usuario'],
             'email' => $validated['email'],
             'clave' => $usuario->clave, // Solo actualizar si se proporciona una nueva clave

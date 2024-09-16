@@ -2,7 +2,7 @@
 
 @section('content')
     <style>
-        .container{
+        .container {
             max-width: 100% !important;
         }
     </style>
@@ -99,29 +99,58 @@
                     console.error('ID no definido');
                     return;
                 }
-                if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-                    $.ajax({
-                        url: "{{ route('usuarios.destroy') }}",
-                        type: 'POST',
-                        data: {
-                            id: id,
-                            _method: 'post', // Aunque este método se usa solo con el método DELETE en REST, aquí está para claridad
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                // Refrescar la tabla DataTable
-                                table.ajax.reload();
-                                alert('Usuario eliminado con éxito.');
-                            } else {
-                                alert('Error: ' + response.message);
+                Swal.fire({
+                    title: "Confrimation!",
+                    text: "¿Está seguro que quiere eliminar el registro?",
+                    type: "warning",
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Confirmar",
+                    cancelButtonText: "Cancelar",
+                    showLoaderOnConfirm: true,
+                    closeOnConfirm: false
+                }).then((isConfirm) => {
+                    if (isConfirm.value === true) {
+                        $.ajax({
+                            url: "{{ route('usuarios.destroy') }}",
+                            type: 'POST',
+                            data: {
+                                id: id,
+                                _method: 'post', // Aunque este método se usa solo con el método DELETE en REST, aquí está para claridad
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    // Refrescar la tabla DataTable
+                                    table.ajax.reload();
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Usuario eliminado con éxito",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });                                    
+                                } else {
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "error",
+                                        title: "Error: " + response.message,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });                                      
+                                }
+                            },
+                            error: function(xhr) {
+                                alert('Error al realizar la solicitud.');
                             }
-                        },
-                        error: function(xhr) {
-                            alert('Error al realizar la solicitud.');
-                        }
-                    });
-                }
+                        });
+                        return true;
+                    }
+                    return false;
+                });
+
             });
 
             // Manejar clic en el botón de eliminación
@@ -308,16 +337,16 @@
 
         <!--Section: Sales Performance KPIs-->
         <!--<section class="mb-4">
-                                        <div class="card">
-                                            <div class="card-header text-center py-3">
-                                                <h5 class="mb-0 text-center">
-                                                    <strong>Sales Performance KPIs</strong>
-                                                </h5>
-                                            </div>
-                                            <div class="card-body">
+                                                    <div class="card">
+                                                        <div class="card-header text-center py-3">
+                                                            <h5 class="mb-0 text-center">
+                                                                <strong>Sales Performance KPIs</strong>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="card-body">
 
-                                            </div>
-                                    </section>-->
+                                                        </div>
+                                                </section>-->
         <!--Section: Sales Performance KPIs-->
 
 

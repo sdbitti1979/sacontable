@@ -6,6 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\PermisosController;
+
 
 //Route::view('/', 'welcome');
 Route::view('login', 'login')->name('login')->middleware('guest');
@@ -25,5 +28,12 @@ Route::post('/usuarios/eliminar', [UsuariosController::class, 'destroy'])->name(
 
 Route::get('/configuracion', [ConfiguracionController::class, 'configuracion'])->name('configuracion');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/roles', [RolesController::class, 'roles'])->name('roles');
+Route::post('/roles.data', [RolesController::class, 'rolespaginado'])->name('roles.data');
+Route::post('/cantidadRoles', [RolesController::class, 'cantidadRoles'])->name('cantidadRoles');
 
+Route::get('/permisos', [PermisosController::class, 'permisos'])->name('permisos');
+Route::post('/permisos.data', [PermisosController::class, 'permisospaginado'])->name('permisos.data');
+Route::post('/cantidadPermisos', [PermisosController::class, 'cantidadPermisos'])->name('cantidadPermisos');
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

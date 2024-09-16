@@ -131,7 +131,7 @@
                                         title: "Usuario eliminado con éxito",
                                         showConfirmButton: false,
                                         timer: 1500
-                                    });                                    
+                                    });
                                 } else {
                                     Swal.fire({
                                         position: "top-end",
@@ -139,7 +139,7 @@
                                         title: "Error: " + response.message,
                                         showConfirmButton: false,
                                         timer: 1500
-                                    });                                      
+                                    });
                                 }
                             },
                             error: function(xhr) {
@@ -209,6 +209,7 @@
 
                     // Mostrar el modal
                     myModal.show();
+
                 },
                 error: function(xhr) {
                     console.error('Error al cargar el modal');
@@ -238,14 +239,15 @@
                 //error: swalError,
                 success: function(json) {
                     table.ajax.reload();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Usuario creado con éxito",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     cerrarModal();
-                    /*swal({
-                        icon: (json.status === 200) ? "success" : "error",
-                        text: json.msg
-                    }).then(function() {
-                        cerrarModal();
 
-                    });*/
 
                 }
             });
@@ -274,14 +276,15 @@
                 //error: swalError,
                 success: function(json) {
                     table.ajax.reload();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Usuario editado con éxito",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     cerrarModal();
-                    /*swal({
-                        icon: (json.status === 200) ? "success" : "error",
-                        text: json.msg
-                    }).then(function() {
-                        cerrarModal();
 
-                    });*/
 
                 }
             });
@@ -333,23 +336,5 @@
                 </div>
         </div>
         </section>
-        <!-- Section: Main chart -->
-
-        <!--Section: Sales Performance KPIs-->
-        <!--<section class="mb-4">
-                                                    <div class="card">
-                                                        <div class="card-header text-center py-3">
-                                                            <h5 class="mb-0 text-center">
-                                                                <strong>Sales Performance KPIs</strong>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="card-body">
-
-                                                        </div>
-                                                </section>-->
-        <!--Section: Sales Performance KPIs-->
-
-
-
     </main>
 @endsection

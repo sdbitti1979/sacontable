@@ -1,13 +1,19 @@
+<script  type="text/javascript">
+    $(document).ready(function($){
+        $("#cuil").focus();
+    });
+</script>
+
 <div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="ajaxModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ajaxModalLabel">Alta de Usuario</h5>                
+                <h5 class="modal-title" id="ajaxModalLabel">Alta de Usuario</h5>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">                            
+                        <div class="col-lg-12">
                             <div class="input-group mb-2 col-lg-12">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="item_desc">CUIL</span>

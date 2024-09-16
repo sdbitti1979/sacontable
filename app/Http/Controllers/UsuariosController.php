@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use GuzzleHttp\Psr7\Response;
-use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log as FacadesLog;
-use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\DataTables;
 
 class UsuariosController extends Controller

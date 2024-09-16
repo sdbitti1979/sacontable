@@ -15,7 +15,7 @@
                     <i class="fas fa-users fa-fw me-3"></i>
                     <span>Usuarios </span>
                 </a>
-                <a href="{{ route('configuracion') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('configuracion') ? 'active' : '' }}" data-mdb-ripple-init="">
+                <a href="{{ route('configuracion') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('configuracion') || request()->is('roles') || request()->is('permisos') ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-cogs"></i>
                     <span>Configuración</span>
                 </a>

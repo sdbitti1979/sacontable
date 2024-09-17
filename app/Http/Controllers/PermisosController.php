@@ -36,4 +36,13 @@ class PermisosController extends Controller
         $data = array("cantidad" => $cantidad);
         return response()->json($data);
     }
+
+    public function permisosAsignadosAlRol(Request $request, Response $response){
+        $rolid = $request->getParam("rolid", null);
+        $permisosM = new PermisosModel();
+        $permisos = $permisosM->permisosAsignadosAlRol($rolid);
+
+        $data = array("permisos", $permisos);
+        return response()->json($data);
+    }
 }

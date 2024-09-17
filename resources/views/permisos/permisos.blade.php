@@ -28,7 +28,7 @@
                     },
                     {
                         data: 'permiso',
-                        name: 'permiso'
+                        name: 'descripcion'
                     }
                 ],
                 language: {

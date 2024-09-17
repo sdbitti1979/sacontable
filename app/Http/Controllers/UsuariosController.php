@@ -15,28 +15,24 @@ class UsuariosController extends Controller
         return view('usuarios');
     }
 
+
     public function usuariospaginado(Request $request)
     {
-        // Paginación sin Eloquent
-        if (request()->ajax()) {
-            $usuariosM = new Usuario();
+        $filtros = $request->input('filtros', []);
+        $ordenes = $request->input('ordenes', []);
 
-            $data = $usuariosM->listarUsuarios();
-
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('edit', function ($row) {
-                    return '<a href="javascript:void(0)" class="edit btn btn-success btn-sm" data-id="'.$row->idusuario.'">Editar</a>';
-                })
-                ->addColumn('delete', function ($row) {
-                    return '<a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="'.$row->idusuario.'">Eliminar</a>';
-                })                
-                ->orderColumn('idusuario', 'idusuario $1') // Establecer el orden por 'idusuario'
-                ->rawColumns(['edit', 'delete'])
-                ->make(true);
-
-            //return view('usuariospaginado');
-        }
+        $query = Usuario::listarUsuarios($filtros, $ordenes); // Usa el método scope en el modelo
+       
+        return DataTables::of($query)->addIndexColumn()
+        ->addColumn('edit', function ($row) {
+            return '<a href="javascript:void(0)" class="edit btn btn-success btn-sm" data-id="'.$row->idusuario.'">Editar</a>';
+        })
+        ->addColumn('delete', function ($row) {
+            return '<a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="'.$row->idusuario.'">Eliminar</a>';
+        })                
+        ->orderColumn('idusuario', 'idusuario $1') // Establecer el orden por 'idusuario'
+        ->rawColumns(['edit', 'delete'])
+        ->make(true);
     }
 
     public function agregarUsuario(Request $request, Response $response)

@@ -8,6 +8,7 @@
                     data-mdb-ripple-init="" aria-current="true">
                     <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Inicio</span>
                 </a>
+           
                 <a href="{{ route('usuarios') }}"
                     class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}"
                     data-mdb-ripple-init="">
@@ -15,6 +16,7 @@
                     <i class="fas fa-users fa-fw me-3"></i>
                     <span>Usuarios </span>
                 </a>
+               
                 <a href="{{ route('configuracion') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('configuracion') || request()->is('roles') || request()->is('permisos') ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-cogs"></i>
                     <span>Configuración</span>

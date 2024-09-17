@@ -5,11 +5,17 @@
         .container {
             max-width: 80% !important;
         }
+
+        #rolesTabla tr.row_selected {
+            background-color: #B5CCD2;
+            opacity: 0.95;
+            font-weight: bold;
+        }
     </style>
     <script type="text/javascript">
         var rolesTabla;
         $(document).ready(function($) {
-            
+
             rolesTabla = $('#rolesTabla').DataTable({
                 processing: true,
                 serverSide: true,
@@ -24,11 +30,21 @@
                 },
                 columns: [{
                         data: 'idrol',
-                        name: 'idrol'
+                        name: 'idrol',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'rol',
-                        name: 'rol'
+                        name: 'descripcion',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'edit',
+                        name: 'edit',
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 language: {
@@ -52,8 +68,47 @@
                     }
                 }
             });
+
+            $('#rolesTabla').on('click', '.edit', function() {
+                var id = $(this).data('id');
+                if (id === undefined) {
+                    console.error('ID no definido');
+                    return;
+                }
+
+                $.ajax({
+                    url: "{{ route('roles.editarRol') }}",
+                    type: "POST",
+                    data: {
+                        rolid: id,
+                        _method: 'post',
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                            'content') // El token CSRF desde el meta
+                    },
+                    success: function(response) {
+                        // Cargar el contenido del modal en el contenedor
+                        $('#modalContainer').html(response);
+
+                        // Seleccionar el modal de Bootstrap 5
+                        var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
+
+                        // Mostrar el modal
+                        myModal.show();
+
+                    },
+                    error: function(xhr) {
+                        console.error('Error al cargar el modal');
+                    }
+                });
+
+            });
+
         });
-    </script>    
+    </script>
+    <div id="modalContainer"></div>
     <main style="margin-top: 58px">
         <div class="container pt-4">
             <!-- Section: Main chart -->
@@ -64,8 +119,8 @@
                             <i class="fas fa-arrow-left"></i> Volver
                         </button>
                         <h5 class="mb-0 text-center"><strong>Roles</strong>
-                           <!-- <i class="fas fa-user-plus position-absolute end-0 me-3"
-                                style="font-size: 1.3rem; cursor: pointer;" onclick="agregarRol()"></i>-->
+                            <!-- <i class="fas fa-user-plus position-absolute end-0 me-3"
+                                                style="font-size: 1.3rem; cursor: pointer;" onclick="agregarRol()"></i>-->
                         </h5>
                     </div>
                     <div class="card-body">
@@ -84,6 +139,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Rol</th>
+                                        <th>Editar</th>
                                     </tr>
                                 </thead>
                                 <tbody>

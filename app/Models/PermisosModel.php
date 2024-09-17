@@ -36,4 +36,13 @@ class PermisosModel extends Model
         return DB::table('permisos')->count();
                 
     }
+
+    public function permisosAsignadosAlRol($roleId){
+        return DB::table('roles')
+        ->join('roles_permisos', 'roles.idrol', '=', 'roles_permisos.rol_id')
+        ->join('permisos', 'roles_permisos.permiso_id', '=', 'permisos.idpermiso')
+        ->where('roles.idrol', $roleId)
+        ->select('permisos.*')
+        ->get();
+    }
 }

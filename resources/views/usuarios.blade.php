@@ -26,44 +26,78 @@
                 },
                 columns: [{
                         data: 'idusuario',
-                        name: 'idusuario'
+                        name: 'idusuario',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'usuario',
-                        name: 'usuario'
+                        name: 'usuario',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'cuil',
-                        name: 'cuil'
+                        name: 'cuil',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'apellido',
-                        name: 'apellido'
+                        name: 'apellido',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'nombre',
-                        name: 'nombre'
+                        name: 'nombre',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'email',
-                        name: 'email'
+                        name: 'email',
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'rol_nombre',
-                        name: 'rol_nombre'
+                        name: 'roles.descripcion',
+                        orderable: false,
+                        searchable: false
                     },
+                    @if (in_array('USUARIOS.EDITAR', $permissions))
                     {
                         data: 'edit',
                         name: 'edit',
                         orderable: false,
                         searchable: false
                     },
+                    @else
+                    {
+                        data: null,
+                        name: null,
+                        defaultContent: '',  // Define contenido vacío
+                        orderable: false,  // Evita que se ordene
+                        searchable: false  // Evita que sea parte de la búsqueda
+                    },
+                    @endif
+                    @if (in_array('USUARIOS.ELIMINAR', $permissions))
                     {
                         data: 'delete',
                         name: 'delete',
                         orderable: false,
                         searchable: false
                     }
+                    @else
+                    {
+                        data: null,
+                        name: null,
+                        defaultContent: '',  // Define contenido vacío
+                        orderable: false,  // Evita que se ordene
+                        searchable: false  // Evita que sea parte de la búsqueda
+                    },
+                    @endif
                 ],
                 language: {
                     "decimal": "",
@@ -298,8 +332,11 @@
                 <div class="card">
                     <div class="card-header py-3">
                         <h5 class="mb-0 text-center"><strong>Usuarios</strong>
-                            <i class="fas fa-user-plus position-absolute end-0 me-3"
-                                style="font-size: 1.3rem; cursor: pointer;" onclick="agregarUsuario()"></i>
+                           
+                            @if (in_array('USUARIOS.CREAR', $permissions))
+                                <i class="fas fa-user-plus position-absolute end-0 me-3"
+                                    style="font-size: 1.3rem; cursor: pointer;" onclick="agregarUsuario()"></i>
+                            @endif
                         </h5>
                     </div>
                     <div class="card-body">
@@ -323,8 +360,8 @@
                                         <th>Nombre</th>
                                         <th>Email</th>
                                         <th>Rol</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

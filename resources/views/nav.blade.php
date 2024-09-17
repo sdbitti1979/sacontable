@@ -6,7 +6,7 @@
                 <a href="{{ route('dashboard') }}"
                     class="list-group-item list-group-item-action py-2 inicio nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                     data-mdb-ripple-init="" aria-current="true">
-                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Inicio</span>
+                    <i class="fas fa-home fa-fw me-3"></i><span>Inicio</span>
                 </a>
            
                 <a href="{{ route('usuarios') }}"
@@ -14,35 +14,51 @@
                     data-mdb-ripple-init="">
                     <!--<i class="fas fa-chart-area fa-fw me-3"></i>-->
                     <i class="fas fa-users fa-fw me-3"></i>
-                    <span>Usuarios </span>
+                    <span>Gestión de Usuarios</span>
+                </a>                            
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('cuentas')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-file-invoice fa-fw me-3"></i>
+                    <span>Plan de Cuentas</span>
                 </a>
-               
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('asientos')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-calculator fa-fw me-3"></i>
+                    <span>Asientos Contables</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('reportes')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-scroll fa-fw me-3"></i>
+                    <span>Reportes</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('inventario')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-boxes fa-fw me-3"></i>
+                    <span>Inventarios</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('compras')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-shopping-cart fa-fw me-3"></i>
+                    <span>Compras</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('ventas')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-blender-phone fa-fw me-3"></i>
+                    <span>Ventas</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('banco')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-university fa-fw me-3"></i>
+                    <span>Banco</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('nomina')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-address-book fa-fw me-3"></i>
+                    <span>Nómina</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('impuestos')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                    <i class="fas fa-file-invoice-dollar fa-fw me-3"></i>
+                    <span>Impuestos</span>
+                </a>
+                
                 <a href="{{ route('configuracion') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('configuracion') || request()->is('roles') || request()->is('permisos') ? 'active' : '' }}" data-mdb-ripple-init="">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-cogs fa-fw me-3"></i>
                     <span>Configuración</span>
-                </a>
-
-                <!--<a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init="">
-                    <i class="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-globe fa-fw me-3"></i><span>International</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-building fa-fw me-3"></i><span>Partners</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-users fa-fw me-3"></i><span>Users</span></a>
-                <a href="#" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init=""><i
-                        class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a>-->
+                </a>                     
                 <a href="./logout" class="list-group-item list-group-item-action py-2" data-mdb-ripple-init="">
-                    <i class="fas fa-door-open"></i>
+                    <i class="fas fa-door-open fa-fw me-3"></i>
                     <span>Salir</span>
                 </a>
 

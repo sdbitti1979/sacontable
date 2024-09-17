@@ -24,20 +24,7 @@
         var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
         myModal.hide();
     }
-    document.addEventListener("DOMContentLoaded", function() {
-        // Variable para almacenar si se ha navegado hacia atrás
-        let isBackNavigation = false;
-
-        // Manejar el evento de navegación hacia atrás
-        window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
-                isBackNavigation = true;
-            }
-        });
-
-        // Puedes usar la variable isBackNavigation para condicionales adicionales
-        window.isBackNavigation = isBackNavigation;
-    });
+   
 </script>
 
 
@@ -80,24 +67,7 @@
 </head>
 
 <body>
-    @php
-        use Illuminate\Support\Facades\Auth;
-    @endphp
-    @if (Auth::check())
-        <p>Usuario autenticado: {{ Auth::user()->name }}</p>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                if (window.isBackNavigation) {
-                    console.log('El usuario ha navegado hacia atrás y está autenticado.');
-                    // Puedes realizar más acciones aquí si es necesario
-                } else {
-                    console.log('El usuario no ha navegado hacia atrás.');
-                }
-            });
-        </script>
-    @else
-        <p>No estás autenticado.</p>
-    @endif
+  
     @if (session()->has('user_permissions'))
         @php
             $permissions = session('user_permissions');

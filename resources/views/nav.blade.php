@@ -16,15 +16,15 @@
                     <i class="fas fa-users fa-fw me-3"></i>
                     <span>Gestión de Usuarios</span>
                 </a>                            
-                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('cuentas')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                <a href="{{ route('cuentas') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('cuentas')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-file-invoice fa-fw me-3"></i>
                     <span>Plan de Cuentas</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('asientos')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                <a href="{{ route('asientos') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('asientos')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-calculator fa-fw me-3"></i>
                     <span>Asientos Contables</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('reportes')  ? 'active' : '' }}" data-mdb-ripple-init="">
+                <a href="{{ route('reportes') }}" class="list-group-item list-group-item-action py-2  {{ request()->is('reportes')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-scroll fa-fw me-3"></i>
                     <span>Reportes</span>
                 </a>
@@ -42,11 +42,11 @@
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('banco')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-university fa-fw me-3"></i>
-                    <span>Banco</span>
+                    <span>Bancos</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('nomina')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-address-book fa-fw me-3"></i>
-                    <span>Nómina</span>
+                    <span>Nóminas</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2  {{ request()->is('impuestos')  ? 'active' : '' }}" data-mdb-ripple-init="">
                     <i class="fas fa-file-invoice-dollar fa-fw me-3"></i>

@@ -1,17 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AsientosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\CuentasController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermisosController;
-
+use App\Http\Controllers\ReportesController;
 
 //Route::view('/', 'welcome');
-Route::view('login', 'login')->name('login')->middleware('guest');
+//Route::view('login', 'login')->name('login')->middleware('guest');
 //Route::view('dashboard', 'dashboard')->middleware('auth');
 
 Route::get('/showLoginForm', [AuthController::class, 'showLoginForm'])->name('login');
@@ -22,6 +24,9 @@ Route::middleware(['auth', \App\Http\Middleware\CargarRolesYPermisos::class])->g
     // Otras rutas protegidas...
     Route::get('/usuarios', [UsuariosController::class, 'usuarios'])->name('usuarios');
     Route::get('/configuracion', [ConfiguracionController::class, 'configuracion'])->name('configuracion');
+    Route::get('/cuentas', [CuentasController::class, 'cuentas'])->name('cuentas');
+    Route::get('/asientos', [AsientosController::class, 'asientos'])->name('asientos');
+    Route::get('/reportes', [ReportesController::class, 'reportes'])->name('reportes');
 });
 
 

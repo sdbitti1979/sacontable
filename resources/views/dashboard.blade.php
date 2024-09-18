@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-   
     <main style="margin-top: 58px">
         <div class="container pt-4">
             <!--Section: Minimal statistics cards-->
@@ -85,19 +84,25 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between px-md-1">
-                                    <div>
-                                        <h3 class="text-success">156</h3>
-                                        <p class="mb-0">New Clients</p>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="far fa-user text-success fa-3x"></i>
+                        <a href="{{ route('usuarios') }}"
+                            class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}"
+                            data-mdb-ripple-init="">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div>
+                                            <h3 class="text-success">0</h3>
+                                            <p class="mb-0">Usuarios</p>
+                                        </div>
+                                        <div class="align-self-center">
+
+                                            <i class="far fa-user text-success fa-3x"></i>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                         <div class="card">

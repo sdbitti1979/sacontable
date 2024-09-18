@@ -329,8 +329,11 @@
         <div class="container pt-4">
             <!-- Section: Main chart -->
             <section class="mb-4">
-                <div class="card">
+                <div class="card">                   
                     <div class="card-header py-3">
+                        <!--<button class="btn btn-secondary" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </button>-->
                         <h5 class="mb-0 text-center"><strong>Usuarios</strong>
                            
                             @if (in_array('USUARIOS.CREAR', $permissions))

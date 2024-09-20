@@ -11,11 +11,12 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div class="align-self-center">
-                                        <i class="fas fa-pencil-alt text-info fa-3x"></i>
+                                        <!--<i class="fas fa-pencil-alt text-info fa-3x"></i>-->
+                                        <i class="fas fa-calculator text-info fa-3x"></i>
                                     </div>
                                     <div class="text-end">
-                                        <h3>278</h3>
-                                        <p class="mb-0">New Posts</p>
+                                        <h3>0</h3>
+                                        <p class="mb-0">Asientos</p>
                                     </div>
                                 </div>
                             </div>
@@ -26,11 +27,12 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div class="align-self-center">
-                                        <i class="far fa-comment-alt text-warning fa-3x"></i>
+                                        <!--<i class="far fa-comment-alt text-warning fa-3x"></i>-->
+                                        <i class="fas fa-file-invoice text-warning fa-3x"></i>
                                     </div>
                                     <div class="text-end">
-                                        <h3>156</h3>
-                                        <p class="mb-0">New Comments</p>
+                                        <h3>0</h3>
+                                        <p class="mb-0">Cuentas</p>
                                     </div>
                                 </div>
                             </div>
@@ -39,15 +41,16 @@
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between px-md-1">
+                                <div class="d-flex justify-content-between px-md-1">                                    
                                     <div class="align-self-center">
-                                        <i class="fas fa-chart-line text-success fa-3x"></i>
+                                        <i class="fas fa-book-open text-info fa-3x"></i>
                                     </div>
-                                    <div class="text-end">
-                                        <h3>64.89 %</h3>
-                                        <p class="mb-0">Bounce Rate</p>
+                                    <div>
+                                        <h3 class="text-end">0</h3>
+                                        <p class="mb-0">Reportes</p>
                                     </div>
                                 </div>
+                              
                             </div>
                         </div>
                     </div>
@@ -56,18 +59,19 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div class="align-self-center">
-                                        <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                                        <!--<i class="fas fa-map-marker-alt text-danger fa-3x"></i>-->
+                                        <i class="fas fa-boxes text-danger fa-3x"></i>
                                     </div>
                                     <div class="text-end">
-                                        <h3>423</h3>
-                                        <p class="mb-0">Total Visits</p>
+                                        <h3>0</h3>
+                                        <p class="mb-0">Inventarios</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                         <div class="card">
                             <div class="card-body">
@@ -84,25 +88,25 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                        <a href="{{ route('usuarios') }}"
-                            class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}"
-                            data-mdb-ripple-init="">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between px-md-1">
-                                        <div>
-                                            <h3 class="text-success">0</h3>
-                                            <p class="mb-0">Usuarios</p>
-                                        </div>
-                                        <div class="align-self-center">
 
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between px-md-1">
+                                    <div>
+                                        <h3 class="text-success">0</h3>
+                                        <p class="mb-0">Usuarios</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <a href="{{ route('usuarios') }}"
+                                            class="list-group-item list-group-item-action py-2 usuarios nav-link {{ request()->is('usuarios') ? 'active' : '' }}"
+                                            data-mdb-ripple-init="">
                                             <i class="far fa-user text-success fa-3x"></i>
-
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+
                     </div>
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                         <div class="card">
@@ -134,29 +138,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-3 col-sm-6 col-12 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between px-md-1">
-                                    <div>
-                                        <h3 class="text-info">278</h3>
-                                        <p class="mb-0">New Posts</p>
-                                    </div>
-                                    <div class="align-self-center">
-                                        <i class="fas fa-book-open text-info fa-3x"></i>
-                                    </div>
-                                </div>
-                                <div class="px-md-1">
-                                    <div class="progress mt-3 mb-1 rounded" style="height: 7px">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>-->
+                <!--<div class="row">
+                   
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                         <div class="card">
                             <div class="card-body">
@@ -204,8 +188,8 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between px-md-1">
                                     <div>
-                                        <h3 class="text-danger">423</h3>
-                                        <p class="mb-0">Total Visits</p>
+                                        <h3 class="text-danger">0</h3>
+                                        <p class="mb-0">Total de Visitas</p>
                                     </div>
                                     <div class="align-self-center">
                                         <i class="fas fa-map-signs text-danger fa-3x"></i>
@@ -220,12 +204,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </section>
             <!--Section: Minimal statistics cards-->
 
             <!--Section: Statistics with subtitles-->
-            <section>
+            <!--<section>
                 <div class="row">
                     <div class="col-xl-6 col-md-12 mb-4">
                         <div class="card">
@@ -310,7 +294,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>-->
         </div>
     </main>
 @endsection

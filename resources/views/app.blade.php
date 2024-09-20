@@ -97,8 +97,8 @@
     </div>
 
     <!-- Pie de página -->
-    <footer class="text-center align-text-bottom mt-4">
-        <p>© 2024 SA 2 - SISTEMA CONTABLE</p>
+    <footer class="footer">
+        &copy; 2024 Sistema Contable. Todos los derechos reservados.
     </footer>
 
 

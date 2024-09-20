@@ -240,10 +240,10 @@
 
                     // Seleccionar el modal de Bootstrap 5
                     var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
-
+                    $("#cuil").focus();
                     // Mostrar el modal
                     myModal.show();
-
+                    
                 },
                 error: function(xhr) {
                     console.error('Error al cargar el modal');
@@ -257,6 +257,7 @@
                 apellido: $("#apellido").val(),
                 nombre: $("#nombre").val(),
                 email: $("#email").val(),
+                rol: $("#rol").val(),
                 clave: $("#clave").val(),
                 usuario: $("#usuario").val()
             }
@@ -293,6 +294,7 @@
                 cuil: $("#cuil").val(),
                 apellido: $("#apellido").val(),
                 nombre: $("#nombre").val(),
+                rol: $("#rol").val(),
                 email: $("#email").val(),
                 clave: $("#clave").val(),
                 usuario: $("#usuario").val()

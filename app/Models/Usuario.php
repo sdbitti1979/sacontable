@@ -31,7 +31,8 @@ class Usuario extends Authenticatable
         'clave',
         'apellido',
         'nombre',
-        'fecha_creacion',
+        'idrol',
+        'activo',               
         'ultimo_inicio_sesion',
         'cuil',
     ];
@@ -90,7 +91,8 @@ class Usuario extends Authenticatable
             'clave' => Hash::make($validated['clave']),
             'apellido' => mb_strtoupper($validated['apellido']),
             'nombre' => mb_strtoupper($validated['nombre']),
-            'fecha_creacion' => date('Y-m-d H:i:s'), //$validated['fecha_creacion'],
+            'idrol' => $validated["rol"],  
+            'activo' => 'T',         
             'ultimo_inicio_sesion' => date('Y-m-d H:i:s') ?? null,
             'cuil' => $validated['cuil'] ?? null,
         ]);
@@ -106,6 +108,8 @@ class Usuario extends Authenticatable
             'usuario' => $validated['usuario'],
             'email' => $validated['email'],
             'clave' => $usuario->clave, // Solo actualizar si se proporciona una nueva clave
+            'idrol' => $validated["rol"],  
+            'activo' => 'T',        
             'apellido' => mb_strtoupper($validated['apellido']),
             'nombre' => mb_strtoupper($validated['nombre']),
             'cuil' => $validated['cuil'] ?? null,

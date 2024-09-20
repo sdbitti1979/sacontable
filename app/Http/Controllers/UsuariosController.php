@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RolesModel;
 use App\Models\Usuario;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -37,17 +38,26 @@ class UsuariosController extends Controller
 
     public function agregarUsuario(Request $request, Response $response)
     {
+        $rolM = new RolesModel();
+        $roles = $rolM->getRoles();
+        
+        $data = array("roles"=>$roles);
 
-        return view('usuarios.agregarUsuarios');
+        return view('usuarios.agregarUsuarios', $data);
     }
 
     public function editarUsuario(Request $request, Response $response)
     {
         $usuariosM = new Usuario();
         $usuario = $usuariosM->dameUsuarioPorId($request->id);
+        
+        $rolM = new RolesModel();
+        $roles = $rolM->getRoles();
+        
 
         return view('usuarios.editarUsuarios', [
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'roles' => $roles
         ]);
     }
 
@@ -59,6 +69,7 @@ class UsuariosController extends Controller
             'email' => 'required|string|email|max:100',
             'clave' => 'required|string|max:255',
             'apellido' => 'required|string|max:30',
+            'rol' => 'required|integer',
             'nombre' => 'required|string|max:30',
             'cuil' => 'nullable|string|max:11', // Si es opcional
         ]);
@@ -76,7 +87,8 @@ class UsuariosController extends Controller
         // Validar los datos recibidos
         $validated = $request->validate([
             'usuario' => 'required|string|max:15',
-            'email' => 'required|string|email|max:100',          
+            'email' => 'required|string|email|max:100', 
+            'rol' => 'required|integer',         
             'apellido' => 'required|string|max:30',
             'nombre' => 'required|string|max:30',
             'cuil' => 'nullable|string|max:11', // Si es opcional

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class RolesModel extends Model
 {
@@ -35,6 +36,18 @@ class RolesModel extends Model
     public function cantidadRoles(){
         return DB::table('roles')->count();
                 
+    }
+
+    public function getRoles(){
+
+        $query = "select idrol, descripcion as rol from roles order by descripcion asc";
+        $pdo = DB::connection()->getPdo();
+        $result = $pdo->prepare($query);
+
+        $result->execute();
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
 }

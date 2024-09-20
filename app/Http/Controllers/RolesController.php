@@ -51,8 +51,10 @@ class RolesController extends Controller
 
         $data = array("permisos", $permisos);
 
-        $vista = view('roles.editarRol', $data);
+        $vista = view('roles.editarRol', compact($data));
 
         return $vista;
     }
+
+  
 }

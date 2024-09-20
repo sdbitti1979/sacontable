@@ -1,6 +1,6 @@
-<script  type="text/javascript">
-    $(document).ready(function($){
-        $("#cuil").focus();
+<script type="text/javascript">
+    $(document).ready(function() {
+
     });
 </script>
 
@@ -44,6 +44,19 @@
                             </div>
                             <div class="input-group mb-2 col-lg-12">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="item_desc">Rol</span>
+                                </div>
+                                <select name="rol" id="rol" class="form-control">
+                                    <option value="0">Seleccione...</option>
+                                    @foreach ($roles as $value => $rol)
+                                        <option value="{{ $rol['idrol'] }}">
+                                            {{ $rol['rol'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-group mb-2 col-lg-12">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="item_desc">Email</span>
                                 </div>
                                 <input type="text" class="form-control" id="email" aria-describedby="email"
@@ -53,7 +66,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="item_desc">Clave</span>
                                 </div>
-                                <input type="text" class="form-control" id="clave" aria-describedby="clave"
+                                <input type="password" class="form-control" id="clave" aria-describedby="clave"
                                     maxlength="500">
                             </div>
                         </div>

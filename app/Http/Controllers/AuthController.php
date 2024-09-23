@@ -17,6 +17,11 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function showRegisterForm()
+    {
+        return view('register');
+    }
+
     public function validateLogin(Request $request)
     {
         $credentials = request()->only('email', 'password');
@@ -38,7 +43,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        
+
         // Invalidar la sesión
         request()->session()->invalidate();
 

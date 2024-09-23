@@ -1,13 +1,13 @@
 @extends('app')
 
-@section('content')    
+@section('content')
     <script type="text/javascript">
         $(document).ready(function($) {
             $("#email").focus();
         });
     </script>
     <div class="login-container">
-        <h1>Sistema Contable</h1>                    
+        <h1>Sistema Contable</h1>
         <form action="{{ route('validatelogin') }}" name="validatelogin" method="POST">
             @csrf
             <div class="mb-3">
@@ -21,10 +21,14 @@
                 <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña...">
             </div>
             <!--<div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>-->
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>-->
             <button type="submit" class="btn btn-primary">Ingresar</button>
+            <!-- Enlace al formulario de registro -->
+            <div class="mt-3">
+                <a href="{{ route('showRegisterForm') }}">¿No tienes una cuenta? Regístrate aquí</a>
+            </div>
         </form>
     </div>
 @endsection

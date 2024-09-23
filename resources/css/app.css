@@ -86,6 +86,36 @@ body {
     color: #ffffff !important;
 }*/
 
+.navbar-brand {
+    max-height: 60px; /* Fija la altura máxima del contenedor */
+    overflow: hidden; /* Evita que el contenido se desborde */
+    display: flex; /* Asegura que el contenido se alinee correctamente */
+    align-items: center; /* Centra verticalmente el logo */
+}
+.navbar-brand img {
+    height: 50px; /* Ajusta este valor según tu preferencia */
+    width: auto; /* Mantén la proporción del logo */
+}
+#main-navbar {
+    height: 70px; /* Fija la altura de la barra de navegación */
+    line-height: 70px; /* Centra verticalmente el contenido */
+}
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 40px; /* Ajuste para pantallas pequeñas */
+    }
+
+    #main-navbar {
+        height: 60px; /* Ajuste para pantallas pequeñas */
+        line-height: 60px;
+    }
+}
+
+
 #sidebarMenu {
     height: 100vh; /* O cualquier altura que necesites */
     overflow-y: auto; /* Habilita el scroll vertical */

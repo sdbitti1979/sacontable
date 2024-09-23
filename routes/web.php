@@ -17,7 +17,10 @@ use App\Http\Controllers\ReportesController;
 //Route::view('dashboard', 'dashboard')->middleware('auth');
 
 Route::get('/showLoginForm', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/showRegisterForm', [AuthController::class, 'showRegisterForm'])->name('showRegisterForm');
+
 Route::post('/validatelogin', [AuthController::class, 'validateLogin'])->name('validatelogin');
+Route::post('/registerUser', [AuthController::class, 'registerUser'])->name('registerUser');
 //Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::middleware(['auth', \App\Http\Middleware\CargarRolesYPermisos::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

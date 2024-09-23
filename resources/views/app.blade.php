@@ -24,7 +24,7 @@
         var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
         myModal.hide();
     }
-   
+
 </script>
 
 
@@ -67,7 +67,7 @@
 </head>
 
 <body>
-  
+
     @if (session()->has('user_permissions'))
         @php
             $permissions = session('user_permissions');
@@ -81,7 +81,7 @@
     <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Mi Aplicación</a>
     </nav>-->
-    @if (!request()->routeIs('login'))
+    @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm'))
         <div class="bd-example">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 @include('nav')

@@ -41,7 +41,7 @@
 
 <body>
     <!-- Barra de navegación -->
-    @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm'))
+    @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm') && !request()->query('modal'))
         <div class="bd-example">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 @include('nav')
@@ -50,61 +50,42 @@
     @endif
 
     <div class="container" id="content">
+
         <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')
     </div>
+    @yield('modalBody')
 
-    <!-- Modal Dinámico -->
-    <div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="ajaxModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ajaxModalLabel">Modal Title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Aquí se inyecta el contenido definido en @section('modalBody') -->
-                        @yield('modalBody')
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Pie de página -->
+    <footer class="footer">
+        &copy; 2024 Sistema Contable. Todos los derechos reservados.
+    </footer>
 
-        <!-- Pie de página -->
-        <footer class="footer">
-            &copy; 2024 Sistema Contable. Todos los derechos reservados.
-        </footer>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-        <!-- jQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Bootstrap 5 JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!-- SweetAlert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
-        <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <!-- Scripts personalizados -->
+    @vite(['resources/js/app.js', 'resources/js/mdb.umd.min.js'])
+    @yield('script') <!-- Sección para scripts específicos de cada vista -->
 
-        <!-- Scripts personalizados -->
-        @vite(['resources/js/app.js', 'resources/js/mdb.umd.min.js'])
-        @yield('script') <!-- Sección para scripts específicos de cada vista -->
-
-        <script>
-            // Función para cerrar el modal
-            function cerrarModal() {
-                var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
-                if (myModal) {
-                    myModal.hide();
-                }
+    <script>
+        // Función para cerrar el modal
+        function cerrarModal() {
+            var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
+            if (myModal) {
+                myModal.hide();
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 
-    </html>
+</html>

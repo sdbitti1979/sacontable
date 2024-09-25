@@ -1,32 +1,99 @@
 <!-- resources/views/home.blade.php -->
 @extends('app')
 
-@section('title', 'Home Page')
 @section('script')
     <script type="text/javascript">
+        var table;
+        $(document).ready(function($) {
+            // Inicializar DataTable
+            table = $('#asientos-table').DataTable({
+                processing: true,
+                serverSide: true,
+                orderable: false,
+                ajax: {
+                    url: "{{ route('asientos.lista') }}",
+                    type: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                columns: [
+                    {
+                        data: 'fecha',
+                        name: 'fecha',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'descripcion',
+                        name: 'descripcion',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'usuario_nombre',
+                        name: 'usuario.nombre',
+                        orderable: false,
+                        searchable: false
+                    } // Columna personalizada para el nombre del usuario
+                ],
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+
+
         function agregarAsiento() {
             $.ajax({
-                url: "{{ route('asientos.agregarAsiento') }}",
+                url: "{{ route('asientos.agregarAsiento') }}?modal=true",
                 type: "POST",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF para protección
                 },
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     // Cargar el contenido del modal en el contenedor
-                    $('#modalContainerAsientos').html(response);
+                    $('#modalContainer').html(response);
 
                     // Inicializar el modal y mostrarlo
-                    //var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
-                    //myModal.show();
+                    var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
+                    //console.log(myModal);
+                    myModal.show();
                 },
                 error: function(xhr) {
                     console.error('Error al cargar el modal');
                 }
             });
         }
+
+        setInterval(function() {
+            table.ajax.reload();
+        }, 30000);
     </script>
 @endsection
+<!-- Modal Dinámico -->
+
+
+
+
 
 @section('content')
     <main style="margin-top: 58px">
@@ -43,8 +110,9 @@
                         </h5>
                     </div>
                     <div class="card-body">
+                        <div id="modalContainer"></div>
                         <div class="table-responsive">
-                            <table id="myTable" class="table table-hover text-nowrap">
+                            <table id="asientos-table" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
@@ -53,12 +121,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2023-09-22</td>
-                                        <td>Descripción de prueba</td>
-                                        <td>Usuario de prueba</td>
-                                    </tr>
-                                    <!-- Aquí se pueden agregar más filas dinámicamente -->
                                 </tbody>
                             </table>
                         </div>
@@ -68,5 +130,3 @@
         </div>
     </main>
 @endsection
-
-

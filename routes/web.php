@@ -30,6 +30,7 @@ Route::middleware(['auth', \App\Http\Middleware\CargarRolesYPermisos::class])->g
     Route::get('/cuentas', [CuentasController::class, 'cuentas'])->name('cuentas');
     Route::get('/asientos', [AsientosController::class, 'asientos'])->name('asientos');
     Route::get('/reportes', [ReportesController::class, 'reportes'])->name('reportes');
+    Route::post('asientos/lista', [AsientosController::class, 'getAsientos'])->name('asientos.lista');
 });
 
 

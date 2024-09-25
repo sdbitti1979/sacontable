@@ -51,4 +51,7 @@ Route::get('/permisos', [PermisosController::class, 'permisos'])->name('permisos
 Route::post('/permisos.data', [PermisosController::class, 'permisospaginado'])->name('permisos.data');
 Route::post('/cantidadPermisos', [PermisosController::class, 'cantidadPermisos'])->name('cantidadPermisos');
 
+
+Route::post('/asientos.agregarAsiento', [AsientosController::class, 'agregarAsiento'])->name('asientos.agregarAsiento');
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

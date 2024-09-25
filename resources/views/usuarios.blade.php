@@ -1,13 +1,14 @@
 @extends('app')
 
-@section('content')
+@section('style')
     <style>
         .container {
             max-width: 100% !important;
         }
     </style>
     <!-- Scripts -->
-
+@endsection
+@section('script')
     <script type="text/javascript">
         var table;
         $(document).ready(function($) {
@@ -67,36 +68,36 @@
                         searchable: false
                     },
                     @if (in_array('USUARIOS.EDITAR', $permissions))
-                    {
-                        data: 'edit',
-                        name: 'edit',
-                        orderable: false,
-                        searchable: false
-                    },
+                        {
+                            data: 'edit',
+                            name: 'edit',
+                            orderable: false,
+                            searchable: false
+                        },
                     @else
-                    {
-                        data: null,
-                        name: null,
-                        defaultContent: '',  // Define contenido vacío
-                        orderable: false,  // Evita que se ordene
-                        searchable: false  // Evita que sea parte de la búsqueda
-                    },
+                        {
+                            data: null,
+                            name: null,
+                            defaultContent: '', // Define contenido vacío
+                            orderable: false, // Evita que se ordene
+                            searchable: false // Evita que sea parte de la búsqueda
+                        },
                     @endif
                     @if (in_array('USUARIOS.ELIMINAR', $permissions))
-                    {
-                        data: 'delete',
-                        name: 'delete',
-                        orderable: false,
-                        searchable: false
-                    }
+                        {
+                            data: 'delete',
+                            name: 'delete',
+                            orderable: false,
+                            searchable: false
+                        }
                     @else
-                    {
-                        data: null,
-                        name: null,
-                        defaultContent: '',  // Define contenido vacío
-                        orderable: false,  // Evita que se ordene
-                        searchable: false  // Evita que sea parte de la búsqueda
-                    },
+                        {
+                            data: null,
+                            name: null,
+                            defaultContent: '', // Define contenido vacío
+                            orderable: false, // Evita que se ordene
+                            searchable: false // Evita que sea parte de la búsqueda
+                        },
                     @endif
                 ],
                 language: {
@@ -230,7 +231,7 @@
             $.ajax({
                 url: "{{ route('usuarios.agregarUsuario') }}",
                 type: "POST",
-                //data: data,                
+                //data: data,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // El token CSRF desde el meta
                 },
@@ -243,7 +244,7 @@
                     $("#cuil").focus();
                     // Mostrar el modal
                     myModal.show();
-                    
+
                 },
                 error: function(xhr) {
                     console.error('Error al cargar el modal');
@@ -326,18 +327,19 @@
             });
         }
     </script>
-
+@endsection
+@section('content')
     <main style="margin-top: 58px">
         <div class="container pt-4">
             <!-- Section: Main chart -->
             <section class="mb-4">
-                <div class="card">                   
+                <div class="card">
                     <div class="card-header py-3">
                         <!--<button class="btn btn-secondary" onclick="history.back()">
-                            <i class="fas fa-arrow-left"></i> Volver
-                        </button>-->
+                                <i class="fas fa-arrow-left"></i> Volver
+                            </button>-->
                         <h5 class="mb-0 text-center"><strong>Usuarios</strong>
-                           
+
                             @if (in_array('USUARIOS.CREAR', $permissions))
                                 <i class="fas fa-user-plus position-absolute end-0 me-3"
                                     style="font-size: 1.3rem; cursor: pointer;" onclick="agregarUsuario()"></i>

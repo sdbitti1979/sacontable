@@ -1,86 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<style>
-    .navbar-dark .nav-item .nav-link {
-        color: #fff;
-    }
-
-    .navbar-dark .nav-item .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        border-radius: 0.25rem;
-        color: #fff;
-    }
-
-    .fa-li {
-        position: relative;
-        left: 0;
-    }
-</style>
-
-<script>
-    function cerrarModal() {
-        var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
-        myModal.hide();
-    }
-
-</script>
-
-
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    <!-- Incluir Bootstrap u otros estilos -->
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
-    <!-- Bootstrap CSS (si aún no lo has agregado) -->
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>@yield('title', 'Sistema Contable')</title>
 
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" />-->
+    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Incluir el JS de Bootstrap u otros scripts -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-
-
-
-    <!--<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>-->
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/mdb.min.css', 'resources/css/admin.css', 'resources/js/mdb.umd.min.js'])
+    <!-- Estilos personalizados -->
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/css/mdb.min.css', 'resources/css/admin.css'])
+    @yield('style') <!-- Sección para estilos específicos de cada vista -->
+
+    <style>
+        .navbar-dark .nav-item .nav-link {
+            color: #fff;
+        }
+
+        .navbar-dark .nav-item .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 0.25rem;
+            color: #fff;
+        }
+
+        .fa-li {
+            position: relative;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
-
-    @if (session()->has('user_permissions'))
-        @php
-            $permissions = session('user_permissions');
-        @endphp
-    @else
-        @php
-            $permissions = []; // O define un valor predeterminado si no hay permisos en la sesión
-        @endphp
-    @endif
-    <!-- Barra de navegación o cualquier otra estructura común -->
-    <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Mi Aplicación</a>
-    </nav>-->
+    <!-- Barra de navegación -->
     @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm'))
         <div class="bd-example">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -90,19 +50,61 @@
     @endif
 
     <div class="container" id="content">
-        {{-- Acceder a los permisos desde la sesión --}}
-
         <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')
     </div>
 
-    <!-- Pie de página -->
-    <footer class="footer">
-        &copy; 2024 Sistema Contable. Todos los derechos reservados.
-    </footer>
+    <!-- Modal Dinámico -->
+    <div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="ajaxModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ajaxModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí se inyecta el contenido definido en @section('modalBody') -->
+                        @yield('modalBody')
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Pie de página -->
+        <footer class="footer">
+            &copy; 2024 Sistema Contable. Todos los derechos reservados.
+        </footer>
 
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-</body>
+        <!-- Bootstrap 5 JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-</html>
+        <!-- SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+        <!-- Scripts personalizados -->
+        @vite(['resources/js/app.js', 'resources/js/mdb.umd.min.js'])
+        @yield('script') <!-- Sección para scripts específicos de cada vista -->
+
+        <script>
+            // Función para cerrar el modal
+            function cerrarModal() {
+                var myModal = bootstrap.Modal.getInstance(document.getElementById('ajaxModal'));
+                if (myModal) {
+                    myModal.hide();
+                }
+            }
+        </script>
+    </body>
+
+    </html>

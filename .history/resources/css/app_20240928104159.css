@@ -1,0 +1,136 @@
+/* app.scss o app.css */
+
+/* Estilos generales */
+/*body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}*/
+
+/* Estilos de contenedores generales */
+/*.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}*/
+
+/* Estilos de formulario */
+.login-container {
+    width: 50%;
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Estilos para inputs y botones */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-container button:hover {
+    background-color: #2980b9;
+}
+
+
+/* Estilos personalizados */
+body {
+    background-color: #f5f7fa;
+    background-image: url('/public/img/background-image.png'); /* Opcional */
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+}
+
+.main-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*.navbar {
+    background-color: #3498db;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+}*/
+
+.navbar-brand {
+    max-height: 60px; /* Fija la altura máxima del contenedor */
+    overflow: hidden; /* Evita que el contenido se desborde */
+    display: flex; /* Asegura que el contenido se alinee correctamente */
+    align-items: center; /* Centra verticalmente el logo */
+}
+.navbar-brand img {
+    height: 50px; /* Ajusta este valor según tu preferencia */
+    width: auto; /* Mantén la proporción del logo */
+}
+#main-navbar {
+    height: 70px; /* Fija la altura de la barra de navegación */
+    line-height: 70px; /* Centra verticalmente el contenido */
+}
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 40px; /* Ajuste para pantallas pequeñas */
+    }
+
+    #main-navbar {
+        height: 60px; /* Ajuste para pantallas pequeñas */
+        line-height: 60px;
+    }
+}
+
+
+#sidebarMenu {
+    height: 100vh; /* O cualquier altura que necesites */
+    overflow-y: auto; /* Habilita el scroll vertical */
+}
+
+
+.footer {
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+@import '@eonasdan/tempus-dominus/dist/css/tempus-dominus.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';

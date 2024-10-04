@@ -60,7 +60,7 @@ Route::post('/cuentas.agregarCuenta', [CuentasController::class, 'agregarCuenta'
 Route::post('/cuentas.getCatNombres', [CuentasController::class, 'getCatNombres'])->name('cuentas.getCatNombres');
 Route::post('/cuentas.guardarCuenta', [CuentasController::class, 'guardarCuenta'])->name('cuentas.guardarCuenta');
 Route::post('/cuentas.lista', [CuentasController::class, 'lista'])->name('cuentas.lista');
-Route::get('/cuentas.getCuentas', [CuentasController::class, 'getCuentas'])->name('cuentas.getCuentas');
+Route::post('/cuentas.getCuentas', [CuentasController::class, 'getCuentas'])->name('cuentas.getCuentas');
 
 
 

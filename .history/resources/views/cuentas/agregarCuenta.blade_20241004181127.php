@@ -59,7 +59,7 @@
                 datepicker.close(); // Cerrar el calendario
             }
         });*/
-        activarFiltro('cuentaPadre', '{{ route('cuentas.getCuentas') }}');
+        activarFiltro('filtroCuentaPadre', '{{ url('/cuentas.getCuentas') }}');
 
         function guardarCuenta() {
             let data = {
@@ -165,8 +165,14 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="cuentaPadre" class="form-label">Cuenta Padre</label>
-                                <input type="text" id="cuentaPadre" name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
-                                <select id="resultados" class="form-control">
+                                <!--<select class="form-control" name="cuentaPadre" id="cuentaPadre">
+                                    <option value="">Seleccione...</option>
+                                    @foreach ($cuentas as $key => $cuenta)
+                                        <option value='{{ $cuenta['idcuenta'] }}'>{{ $cuenta['nombre'] }}</option>
+                                    @endforeach
+                                </select>-->
+                                <input type="text" id="cuentaPadre" name="cuentaPadre" placeholder="Escribe un nombre...">
+                                <select id="resultados">
                                     <!-- Aquí se mostrarán los resultados -->
                                 </select>
 

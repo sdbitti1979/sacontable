@@ -21,6 +21,7 @@ window.Swal = swal;
 window.activarFiltro = function (filtro, url) {
     $("#" + filtro).on('input', function() {
         var valor = $(this).val().trim();
+
         /*if (valor === null || valor === "") {
             $("#resultados").empty();
             return; // No continuar con la solicitud AJAX

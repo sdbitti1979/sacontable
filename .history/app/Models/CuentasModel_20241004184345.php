@@ -174,7 +174,7 @@ class CuentasModel extends Model
         $stmtTotal = $pdo->prepare($query);
 
         if(isset($filtro)){
-            $stmtTotal->bindValue(":param", mb_strtoupper($filtro) ."%");
+            $stmtTotal->bindValue(":param","%". mb_strtoupper($filtro) ."%");
         }
         $stmtTotal->execute();
         $result = $stmtTotal->fetchall(PDO::FETCH_ASSOC);

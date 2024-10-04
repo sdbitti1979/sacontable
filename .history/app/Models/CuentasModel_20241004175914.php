@@ -168,13 +168,13 @@ class CuentasModel extends Model
                     left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
                     left join cuentas c1 on (c1.idcuenta = c.id_padre)";
         if(isset($filtro)){
-            $query .= " where upper(c.nombre) like :param ";
+            $query .= " where c.nombre like :param ";
         }
         $pdo = DB::connection()->getPdo();
         $stmtTotal = $pdo->prepare($query);
 
         if(isset($filtro)){
-            $stmtTotal->bindValue(":param", mb_strtoupper($filtro) ."%");
+            $stmtTotal->bindValue(":param", $filtro);
         }
         $stmtTotal->execute();
         $result = $stmtTotal->fetchall(PDO::FETCH_ASSOC);

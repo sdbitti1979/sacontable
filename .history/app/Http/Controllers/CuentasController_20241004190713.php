@@ -44,7 +44,7 @@ class CuentasController extends Controller
 
     public function getCuentas(Request $request){
         $filtro = $request->input('codigo');
-
+        //var_dump($filtro);
         if (empty($filtro)) {
             // Si no hay código, devolver una respuesta vacía
             return response()->json([]);

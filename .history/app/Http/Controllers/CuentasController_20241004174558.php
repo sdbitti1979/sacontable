@@ -26,7 +26,6 @@ class CuentasController extends Controller
         //$catNombresM = new CatNombresModel();
         $catClasificacionM = new ClasificacionesModel();
 
-
         $data = array("clasificaciones" => $catClasificacionM->getClasificaciones());
 
         return view('cuentas.agregarCuenta', $data);
@@ -42,15 +41,9 @@ class CuentasController extends Controller
         return response()->json($data);
     }
 
-    public function getCuentas(Request $request){
-        $filtro = $request->input('codigo');
-
-        if (empty($filtro)) {
-            // Si no hay código, devolver una respuesta vacía
-            return response()->json([]);
-        }
+    public function getCuentas(){
         $cuentasM = new CuentasModel();
-        $data = $cuentasM->getCuentas($filtro);
+        $data = $cuentasM->getCuentas();
 
         return response()->json($data);
 

@@ -43,12 +43,8 @@ class CuentasController extends Controller
     }
 
     public function getCuentas(Request $request){
-        $filtro = $request->input('codigo');
+        $filtro = $request->only("codigo");
 
-        if (empty($filtro)) {
-            // Si no hay código, devolver una respuesta vacía
-            return response()->json([]);
-        }
         $cuentasM = new CuentasModel();
         $data = $cuentasM->getCuentas($filtro);
 

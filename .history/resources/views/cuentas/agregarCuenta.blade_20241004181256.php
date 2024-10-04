@@ -165,8 +165,8 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="cuentaPadre" class="form-label">Cuenta Padre</label>
-                                <input type="text" id="cuentaPadre" name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
-                                <select id="resultados" class="form-control">
+                                <input type="text" id="cuentaPadre" name="cuentaPadre" placeholder="Escribe un nombre...">
+                                <select id="resultados">
                                     <!-- Aquí se mostrarán los resultados -->
                                 </select>
 

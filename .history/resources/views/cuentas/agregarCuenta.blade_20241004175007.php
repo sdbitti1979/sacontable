@@ -13,7 +13,7 @@
         $(document).ready(function($) {
             $("#clasificacion").on("change", function() {
                 var nombre = $("#clasificacion :selected").text()
-                    .trim(); // Obtiene el valor seleccionado del select
+            .trim(); // Obtiene el valor seleccionado del select
 
                 $.ajax({
                     url: "{{ route('cuentas.getCatNombres') }}", // URL del servidor donde se hará la solicitud
@@ -35,8 +35,7 @@
 
                         // Usar map para crear las opciones y agregarlas al select
                         const opciones = response.map(item =>
-                            '<option value="' + item.id_catnombres + '">' + item.nombre +
-                            '</option>'
+                            '<option value="' + item.id_catnombres + '">' + item.nombre + '</option>'
                         );
 
                         // Insertar las opciones en el select
@@ -59,16 +58,15 @@
                 datepicker.close(); // Cerrar el calendario
             }
         });*/
-        activarFiltro('cuentaPadre', '{{ route('cuentas.getCuentas') }}');
 
-        function guardarCuenta() {
+        function guardarCuenta(){
             let data = {
                 nombre: $("#nombre").val(),
                 codigo: $("#codigo").val(),
                 clasificacion: $("#clasificacion").val(),
                 catnombre: $("#catnombre").val(),
                 saldoActual: $("#saldoActual").val(),
-                recibeSaldo: ($("#recibeSaldo").is(':checked') ? 'T' : 'F'),
+                recibeSaldo: ($("#recibeSaldo").is(':checked')? 'T' :'F'),
                 cuentaPadre: $("#cuentaPadre").val()
             }
 
@@ -96,8 +94,7 @@
                             myModal.hide();
                             table.ajax.reload();
                             $('#ajaxModalAsientos').on('hidden.bs.modal', function() {
-                                datepicker
-                            .close(); // Cierra el calendario de flatpickr cuando el modal se oculta
+                                datepicker.close(); // Cierra el calendario de flatpickr cuando el modal se oculta
                             });
                         }
                     });
@@ -165,11 +162,12 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="cuentaPadre" class="form-label">Cuenta Padre</label>
-                                <input type="text" id="cuentaPadre" name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
-                                <select id="resultados" class="form-control">
-                                    <!-- Aquí se mostrarán los resultados -->
+                                <select class="form-control" name="cuentaPadre" id="cuentaPadre">
+                                    <option value="">Seleccione...</option>
+                                    @foreach ($cuentas as $key => $cuenta )
+                                        <option value='{{ $cuenta["idcuenta"] }}'>{{  $cuenta["nombre"] }}</option>
+                                    @endforeach
                                 </select>
-
                             </div>
                         </div>
                     </form>

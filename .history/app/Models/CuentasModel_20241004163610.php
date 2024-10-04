@@ -73,26 +73,12 @@ class CuentasModel extends Model
         $pdo = DB::connection()->getPdo();
 
         $query = "SELECT c.idcuenta, c.nombre, c.codigo, c.clasificacion_id, cl.nombre as clasificacion,
-                            c.saldo_actual, c.id_padre, COALESCE(c1.nombre, 's/c') as cuenta_padre,
-                            case when c.utilizada = 'F' then 'NO'
-                                 when c.utilizada = 'T' then 'SI'
-                                 else ' '
-                                 end as utilizada,
-                            case when c.eliminada = 'F' then 'NO'
-                                 when c.eliminada = 'T' then 'SI'
-                                 else ' '
-                                 end as eliminada ,
-                            c.modificado, c.solo_admin, c.usuario_id,
-                            case when c.recibe_saldo = 'F' then 'NO'
-                                 when c.recibe_saldo = 'T' then 'Si'
-                                 else ' '
-                                 end as recibe_saldo,
-                            c.nombre_id,
+                            c.saldo_actual, c.id_padre, c.utilizada, c.eliminada,
+                            c.modificado, c.solo_admin, c.usuario_id, c.recibe_saldo, c.nombre_id,
                             u.usuario
                     FROM cuentas c
                     left join usuarios u on (c.usuario_id = u.idusuario)
-                    left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
-                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
+                    left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)";
         if (!empty($searchValue)) {
             $query .= " WHERE c.nombre LIKE :search OR c.codigo LIKE :search";
         }
@@ -142,36 +128,5 @@ class CuentasModel extends Model
         $totalRecords = $stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
 
         return $totalRecords;
-    }
-
-    public function getCuentas()
-    {
-        $query = "SELECT c.idcuenta, c.nombre, c.codigo, c.clasificacion_id, cl.nombre as clasificacion,
-                            c.saldo_actual, c.id_padre, COALESCE(c1.nombre, 's/c') as cuenta_padre,
-                            case when c.utilizada = 'F' then 'NO'
-                                 when c.utilizada = 'T' then 'SI'
-                                 else ' '
-                                 end as utilizada,
-                            case when c.eliminada = 'F' then 'NO'
-                                 when c.eliminada = 'T' then 'SI'
-                                 else ' '
-                                 end as eliminada ,
-                            c.modificado, c.solo_admin, c.usuario_id,
-                            case when c.recibe_saldo = 'F' then 'NO'
-                                 when c.recibe_saldo = 'T' then 'Si'
-                                 else ' '
-                                 end as recibe_saldo,
-                            c.nombre_id,
-                            u.usuario
-                    FROM cuentas c
-                    left join usuarios u on (c.usuario_id = u.idusuario)
-                    left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
-                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
-        $pdo = DB::connection()->getPdo();
-        $stmtTotal = $pdo->prepare($query);
-        $stmtTotal->execute();
-        $result = $stmtTotal->fetchall(PDO::FETCH_ASSOC);
-
-        return $result;
     }
 }

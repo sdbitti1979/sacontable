@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  *
  */
-class CuentasController extends Controller
+class CuentasController extends Controller //controller de cuentas
 {
     public function cuentas(Request $request)
     {

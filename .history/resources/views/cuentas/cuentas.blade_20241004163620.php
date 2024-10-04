@@ -34,7 +34,7 @@
                                     `<div>${item.codigo}</div>`,
                                     `<div>${item.clasificacion}</div>`,
                                     `<div>${item.saldo_actual}</div>`,
-                                    `<div>${item.cuenta_padre}</div>`,
+                                    `<div>${item.id_padre}</div>`,
                                     `<div>${item.utilizada}</div>`,
                                     `<div>${item.eliminada}</div>`,
                                     `<div>${item.usuario}</div>`,

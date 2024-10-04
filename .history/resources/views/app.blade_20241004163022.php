@@ -48,21 +48,31 @@
         </div>
     </div>-->
     <!-- Barra de navegación -->
-
-    @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm') && !request()->query('modal'))
-        <div class="bd-example">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                @include('nav')
-            </nav>
-        </div>
-    @endif
-
     <div class="container-fluid" id="content">
+        <div class="row">
+            <!-- Columna del menú lateral -->
+            <div class="col-md-2">
+                <!-- Menú lateral -->
+                @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm') && !request()->query('modal'))
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="sidebarMenu">
+                            @include('nav') <!-- Aquí va tu menú lateral -->
+                        </div>
+                    </nav>
+                @endif
+            </div>
 
-        <!-- Aquí se inyectará el contenido específico de cada vista -->
-        @yield('content')
+            <!-- Columna del contenido principal -->
+            <div class="col-md-10">
+                <!-- Aquí se inyectará el contenido específico de cada vista -->
+                @yield('content')
+            </div>
+        </div>
     </div>
-    @yield('modalBody')
+
 
     <!-- Pie de página -->
     <footer class="footer">

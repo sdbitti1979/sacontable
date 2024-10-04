@@ -57,7 +57,7 @@
         </div>
     @endif
 
-    <div class="container-fluid" id="content">
+    <div class="container" id="content">
 
         <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')

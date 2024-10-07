@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
         "axios": "^1.7.4",
         "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^1.0",
@@ -17,6 +18,7 @@
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
         "jquery-datetimepicker": "^2.5.21",
+        "jquery-ui": "^1.14.0",
         "sweetalert2": "^11.6.13"
     }
 }

@@ -43,24 +43,16 @@ class CuentasController extends Controller
     }
 
     public function getCuentas(Request $request){
-        $filtro = $request->input('descripcion');
+        $filtro = $request->input('term');
 
         if (empty($filtro)) {
             // Si no hay código, devolver una respuesta vacía
             return response()->json([]);
         }
         $cuentasM = new CuentasModel();
-        $cuentas = $cuentasM->getCuentas($filtro);
+        $data = $cuentasM->getCuentas($filtro);
 
-        $result = array_map(function ($cuenta) {
-            return [
-                'label' => $cuenta['nombre'],  // Texto que se muestra en el autocomplete
-                'value' => $cuenta['nombre'],  // Valor que se completa en el campo
-                'id' => $cuenta['idcuenta']    // ID de la cuenta para usar en el campo oculto
-            ];
-        }, $cuentas);
-
-        return response()->json($result);
+        return response()->json($data);
 
     }
 

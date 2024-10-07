@@ -18,9 +18,6 @@ export default defineConfig({
     build: {
         manifest: true,
         outDir: 'public/build',
-        rollupOptions: {
-            external: ['jquery', 'jquery-ui']
-        }
     },
     css: {
         preprocessorOptions: {
@@ -30,3 +27,4 @@ export default defineConfig({
         }
     }
 });
+

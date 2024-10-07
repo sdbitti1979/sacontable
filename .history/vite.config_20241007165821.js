@@ -14,13 +14,11 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        vue(),
     ],
     build: {
         manifest: true,
         outDir: 'public/build',
-        rollupOptions: {
-            external: ['jquery', 'jquery-ui']
-        }
     },
     css: {
         preprocessorOptions: {

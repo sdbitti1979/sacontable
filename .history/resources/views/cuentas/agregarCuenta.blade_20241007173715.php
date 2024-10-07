@@ -6,11 +6,12 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
+            z-index: 1000 !important;
+            /* Asegura que esté en el frente */
             max-height: 200px;
+            /* Ajusta la altura si es necesario */
             overflow-y: auto;
-            background-color: white;
-            /* Asegura que el fondo sea visible */
+            /* Habilita desplazamiento si hay muchos elementos */
         }
     </style>
 @endsection
@@ -61,31 +62,22 @@
                 autoFocus: true,
                 source: function(request, response) {
                     $.ajax({
-                        url: "{{ route('cuentas.getCuentas') }}", // Ruta al método en el controlador
-                        dataType: "json",
-                        type: "GET",
-                        data: {
-                            descripcion: request
-                                .term // Pasar el término de búsqueda como parámetro
-                        },
+                        source: [
+        { label: "Capital Social", value: "Capital Social", id: 3 },
+        { label: "Activo Fijo", value: "Activo Fijo", id: 4 }
+    ],
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(data) {
-                            console.log(data); // Verifica los datos en la consola
-                            response($.map(data, function(item) {
-                                return {
-                                    label: item.label,
-                                    value: item.value,
-                                    id: item.id
-                                };
-                            }));
+                            //console.log(data); // Verifica los datos en la consola
+                            response(data); // Envía los datos al autocomplete
                         }
                     });
                 },
                 minLength: 1,
                 select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
+                    console.log(ui.item); // Verifica los datos seleccionados en la consola
                     $("#cuentaPadreId").val(ui.item.id);
                     $("#cuentaPadre").val(ui.item.value);
                     return false;

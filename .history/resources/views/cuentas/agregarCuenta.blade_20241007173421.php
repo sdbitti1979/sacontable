@@ -6,11 +6,7 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            /* Asegura que el fondo sea visible */
+            z-index: 1000 !important;
         }
     </style>
 @endsection
@@ -65,27 +61,20 @@
                         dataType: "json",
                         type: "GET",
                         data: {
-                            descripcion: request
-                                .term // Pasar el término de búsqueda como parámetro
+                            descripcion: request.term // Pasar el término de búsqueda como parámetro
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(data) {
                             console.log(data); // Verifica los datos en la consola
-                            response($.map(data, function(item) {
-                                return {
-                                    label: item.label,
-                                    value: item.value,
-                                    id: item.id
-                                };
-                            }));
+                            response(data); // Envía los datos al autocomplete
                         }
                     });
                 },
                 minLength: 1,
                 select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
+                    console.log(ui.item); // Verifica los datos seleccionados en la consola
                     $("#cuentaPadreId").val(ui.item.id);
                     $("#cuentaPadre").val(ui.item.value);
                     return false;

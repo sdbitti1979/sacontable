@@ -8,7 +8,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/mdb.umd.min.js',
+                'resources/js/mdb.umd.min.js',                
                 'resources/css/mdb.min.css',
                 'resources/css/admin.css',
             ],
@@ -18,9 +18,11 @@ export default defineConfig({
     build: {
         manifest: true,
         outDir: 'public/build',
-        rollupOptions: {
-            external: ['jquery', 'jquery-ui']
-        }
+    },
+    resolve: {
+        alias: {
+            '$': 'jQuery'
+        },
     },
     css: {
         preprocessorOptions: {

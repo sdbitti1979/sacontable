@@ -3,7 +3,8 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#email").focus();
+            alert();
+            //$("#email").focus();
         });
     </script>
 @endsection

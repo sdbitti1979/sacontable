@@ -16,16 +16,39 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 
-    <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <!-- Estilos personalizados -->
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/css/mdb.min.css', 'resources/css/admin.css'])
-    @yield('style')
+    @yield('style') <!-- Sección para estilos específicos de cada vista -->
+
+    <style>
+        .navbar-dark .nav-item .nav-link {
+            color: #fff;
+        }
+
+        .navbar-dark .nav-item .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 0.25rem;
+            color: #fff;
+        }
+
+        .fa-li {
+            position: relative;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Spinner que aparecerá al cargar la página -->
+    <!--<div id="loading-overlay">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>-->
     <!-- Barra de navegación -->
+
     @if (!request()->routeIs('login') && !request()->routeIs('showRegisterForm') && !request()->query('modal'))
         <div class="bd-example">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,6 +58,8 @@
     @endif
 
     <div class="container-fluid" id="content">
+
+        <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')
     </div>
     @yield('modalBody')
@@ -44,28 +69,32 @@
         &copy; 2024 Sistema Contable. Todos los derechos reservados.
     </footer>
 
-    <!-- jQuery (importado desde el CDN para asegurar que esté disponible globalmente) -->
+    <!-- jQuery -->
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- jQuery UI -->
+    <!-- jQuery UI (CSS y JS) -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <!-- Scripts personalizados -->
     @vite(['resources/js/app.js', 'resources/js/mdb.umd.min.js'])
-    @yield('script')
+    @yield('script') <!-- Sección para scripts específicos de cada vista -->
 
     <script>
         // Función para cerrar el modal
         function cerrarModal(id) {
+
             console.log('Intentando cerrar el modal con ID: ' + id);
             var myModal = bootstrap.Modal.getInstance(document.getElementById(id));
             console.log(myModal);
@@ -75,7 +104,7 @@
             } else {
                 console.error('No se encontró la instancia del modal con el ID: ' + id);
             }
-        }
+        };
     </script>
 </body>
 

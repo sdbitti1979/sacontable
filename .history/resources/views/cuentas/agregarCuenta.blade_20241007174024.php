@@ -6,7 +6,7 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
+            z-index: 1000 !important;
             max-height: 200px;
             overflow-y: auto;
             background-color: white;
@@ -85,7 +85,7 @@
                 },
                 minLength: 1,
                 select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
+                    console.log(ui.item); // Verifica los datos seleccionados en la consola
                     $("#cuentaPadreId").val(ui.item.id);
                     $("#cuentaPadre").val(ui.item.value);
                     return false;

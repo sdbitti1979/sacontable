@@ -43,7 +43,7 @@ class CuentasController extends Controller
     }
 
     public function getCuentas(Request $request){
-        $filtro = $request->input('descripcion');
+        $filtro = $request->input('term');
 
         if (empty($filtro)) {
             // Si no hay código, devolver una respuesta vacía
@@ -60,7 +60,7 @@ class CuentasController extends Controller
             ];
         }, $cuentas);
 
-        return response()->json($result);
+        return response()->json($data);
 
     }
 

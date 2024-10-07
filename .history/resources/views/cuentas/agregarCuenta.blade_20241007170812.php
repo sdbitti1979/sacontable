@@ -4,14 +4,6 @@
         .form-check {
             padding-top: 2em;
         }
-
-        .ui-autocomplete {
-            z-index: 10000 !important;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            /* Asegura que el fondo sea visible */
-        }
     </style>
 @endsection
 @section('script')
@@ -56,44 +48,6 @@
                     }
                 });
             });
-
-            $("#cuentaPadre").autocomplete({
-                autoFocus: true,
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{ route('cuentas.getCuentas') }}", // Ruta al método en el controlador
-                        dataType: "json",
-                        type: "GET",
-                        data: {
-                            descripcion: request
-                                .term // Pasar el término de búsqueda como parámetro
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(data) {
-                            console.log(data); // Verifica los datos en la consola
-                            response($.map(data, function(item) {
-                                return {
-                                    label: item.label,
-                                    value: item.value,
-                                    id: item.id
-                                };
-                            }));
-                        }
-                    });
-                },
-                minLength: 1,
-                select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
-                    $("#cuentaPadreId").val(ui.item.id);
-                    $("#cuentaPadre").val(ui.item.value);
-                    return false;
-                }
-            });
-
-
-
         });
         flatpickr("#fechaasiento", {
             locale: "es",
@@ -143,7 +97,7 @@
                             table.ajax.reload();
                             $('#ajaxModalAsientos').on('hidden.bs.modal', function() {
                                 datepicker
-                                    .close(); // Cierra el calendario de flatpickr cuando el modal se oculta
+                            .close(); // Cierra el calendario de flatpickr cuando el modal se oculta
                             });
                         }
                     });
@@ -211,9 +165,10 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="cuentaPadre" class="form-label">Cuenta Padre</label>
-                                <input type="hidden" id="cuentaPadreId" name="cuentaPadreId">
-                                <input type="text" id="cuentaPadre" style="position: relative; z-index: 9999;"
-                                    name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
+                                <input type="text" id="cuentaPadre" name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
+                                <select id="resultados" class="form-control">
+                                    <!-- Aquí se mostrarán los resultados -->
+                                </select>
 
                             </div>
                         </div>

@@ -12,19 +12,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 import './bootstrap';
 
-//import $ from 'jquery';
-//window.$ = window.jQuery = $;
-
-import 'jquery-ui/ui/widgets/autocomplete';
-import 'jquery-ui/themes/base/all.css';
+//import jQuery from 'jquery';
+//window.$ = jQuery;
 
 import swal from 'sweetalert2';
 window.Swal = swal;
 
-/*window.activarFiltro = function (filtro, url) {
+window.activarFiltro = function (filtro, url) {
     $("#" + filtro).on('input', function() {
         var valor = $(this).val().trim();
-
+        /*if (valor === null || valor === "") {
+            $("#resultados").empty();
+            return; // No continuar con la solicitud AJAX
+        }*/
         // Hacer una solicitud AJAX al servidor
         $.ajax({
             url: url,
@@ -48,7 +48,7 @@ window.Swal = swal;
             }
         });
     });
-}*/
+}
 
 
 

@@ -6,7 +6,7 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
+            z-index: 1000 !important;
             max-height: 200px;
             overflow-y: auto;
             background-color: white;

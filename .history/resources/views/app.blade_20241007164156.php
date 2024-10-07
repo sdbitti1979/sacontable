@@ -21,7 +21,25 @@
 
     <!-- Estilos personalizados -->
     @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/css/mdb.min.css', 'resources/css/admin.css'])
-    @yield('style')
+    @yield('style') <!-- Sección para estilos específicos de cada vista -->
+
+    <style>
+        .navbar-dark .nav-item .nav-link {
+            color: #fff;
+        }
+
+        .navbar-dark .nav-item .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 0.25rem;
+            color: #fff;
+        }
+
+        .fa-li {
+            position: relative;
+            left: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,6 +53,7 @@
     @endif
 
     <div class="container-fluid" id="content">
+        <!-- Aquí se inyectará el contenido específico de cada vista -->
         @yield('content')
     </div>
     @yield('modalBody')
@@ -44,7 +63,7 @@
         &copy; 2024 Sistema Contable. Todos los derechos reservados.
     </footer>
 
-    <!-- jQuery (importado desde el CDN para asegurar que esté disponible globalmente) -->
+    <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- jQuery UI -->
@@ -54,14 +73,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
     <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <!-- Scripts personalizados -->
     @vite(['resources/js/app.js', 'resources/js/mdb.umd.min.js'])
-    @yield('script')
+    @yield('script') <!-- Sección para scripts específicos de cada vista -->
 
     <script>
         // Función para cerrar el modal
@@ -75,7 +94,7 @@
             } else {
                 console.error('No se encontró la instancia del modal con el ID: ' + id);
             }
-        }
+        };
     </script>
 </body>
 

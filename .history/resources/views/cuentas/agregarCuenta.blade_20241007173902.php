@@ -6,11 +6,12 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
+            z-index: 1000 !important;
+            /* Asegura que esté en el frente */
             max-height: 200px;
+            /* Ajusta la altura si es necesario */
             overflow-y: auto;
-            background-color: white;
-            /* Asegura que el fondo sea visible */
+            /* Habilita desplazamiento si hay muchos elementos */
         }
     </style>
 @endsection
@@ -85,7 +86,7 @@
                 },
                 minLength: 1,
                 select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
+                    console.log(ui.item); // Verifica los datos seleccionados en la consola
                     $("#cuentaPadreId").val(ui.item.id);
                     $("#cuentaPadre").val(ui.item.value);
                     return false;

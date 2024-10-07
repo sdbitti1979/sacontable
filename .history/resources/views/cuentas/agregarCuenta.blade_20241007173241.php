@@ -6,11 +6,7 @@
         }
 
         .ui-autocomplete {
-            z-index: 10000 !important;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            /* Asegura que el fondo sea visible */
+            z-index: 1000 !important;
         }
     </style>
 @endsection
@@ -73,22 +69,14 @@
                         },
                         success: function(data) {
                             console.log(data); // Verifica los datos en la consola
-                            response($.map(data, function(item) {
-                                return {
-                                    label: item.label,
-                                    value: item.value,
-                                    id: item.id
-                                };
-                            }));
+                            response(data); // Envía los datos al autocomplete
                         }
                     });
                 },
                 minLength: 1,
                 select: function(event, ui) {
-                    console.log(ui); // Verifica los datos seleccionados en la consola
-                    $("#cuentaPadreId").val(ui.item.id);
+                    $("#cuentaPadreId").val(ui.item.id); // Guarda el ID de la cuenta seleccionada
                     $("#cuentaPadre").val(ui.item.value);
-                    return false;
                 }
             });
 

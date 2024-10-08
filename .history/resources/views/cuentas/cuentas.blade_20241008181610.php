@@ -24,6 +24,14 @@
                 orderable: false,
                 responsive: true,
                 scrollY: '350px',
+                "createdRow": function(row, data, dataIndex) {
+                    console.log(data.item);
+                    // Aplica la condición directamente en cada fila al momento de crearse
+                    // Por ejemplo, si quieres resaltar las filas donde el valor de la primera columna es mayor a 100
+                    if (data[6] == 'SI') { // Cambia "data[0]" a la columna adecuada
+                        $(row).addClass('highlight');
+                    }
+                },
                 ajax: {
                     url: "{{ route('cuentas.lista') }}",
                     type: 'post',

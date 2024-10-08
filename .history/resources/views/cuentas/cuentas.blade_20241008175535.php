@@ -2,16 +2,10 @@
 @section('style')
     <style>
         /*.container-xxl{
-                    max-width: 1500px !important;
-                    width: 1320px;
-                    margin-left: 0em !important;
-                }*/
-
-        .highlight {
-            background-color: yellow;
-            /* Cambia el color según prefieras */
-            color: black;
-        }
+            max-width: 1500px !important;
+            width: 1320px;
+            margin-left: 0em !important;
+        }*/
     </style>
 @endsection
 @section('script')
@@ -30,7 +24,6 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-
                     dataSrc: json => {
                         //console.log(json);
                         if (Array.isArray(json.data)) {
@@ -49,7 +42,7 @@
                                     `<div>
                                     ${item.eliminada == 'NO' && item.utilizada == 'NO'? `<i class="fas fa-trash-alt fa-lg" onclick="eliminarCuenta(${item.idcuenta})"></i>`:``}
                                     </div>`
-                                ];
+                                    ];
                             });
                         } else {
                             console.error("La respuesta JSON no contiene un array en el campo 'data'.");
@@ -57,7 +50,6 @@
                         }
                     }
                 },
-
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",
@@ -98,31 +90,6 @@
                     myModal = new bootstrap.Modal(document.getElementById('ajaxModalCuentas'));
                     //console.log(myModal);
                     myModal.show();
-                },
-                error: function(xhr) {
-                    console.error('Error al cargar el modal');
-                }
-            });
-        }
-
-        function eliminarCuenta(idcuenta) {
-            $.ajax({
-                url: "{{ route('cuentas.eliminarCuenta') }}",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF para protección
-                },
-                data: {
-                    idcuenta: idcuenta
-                },
-                success: function(response) {
-
-                    table.ajax.reload();
-                    Swal.fire({
-                        text: response.msg,
-                        icon: response.type,
-                        confirmButtonText: 'Aceptar'
-                    });
                 },
                 error: function(xhr) {
                     console.error('Error al cargar el modal');

@@ -159,7 +159,7 @@ class CuentasModel extends Model
         $query = "SELECT c.idcuenta, c.nombre
                     FROM cuentas c ";
         if (isset($filtro)) {
-            $query .= " WHERE c.codigo = :search and c.eliminada = 'F' " ;
+            $query .= " WHERE c.codigo = :search";
         }
         $stmt = $pdo->prepare($query);
 

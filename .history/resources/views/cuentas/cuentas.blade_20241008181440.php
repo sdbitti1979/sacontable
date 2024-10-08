@@ -30,7 +30,6 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-
                     dataSrc: json => {
                         //console.log(json);
                         if (Array.isArray(json.data)) {
@@ -57,7 +56,13 @@
                         }
                     }
                 },
-
+                "createdRow": function(row, data, dataIndex) {
+                    // Aplica la condición directamente en cada fila al momento de crearse
+                    // Por ejemplo, si quieres resaltar las filas donde el valor de la primera columna es mayor a 100
+                    if (data[6] == 'SI') { // Cambia "data[0]" a la columna adecuada
+                        $(row).addClass('highlight');
+                    }
+                },
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",

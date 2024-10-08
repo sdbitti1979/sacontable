@@ -2,10 +2,10 @@
 @section('style')
     <style>
         /*.container-xxl{
-                    max-width: 1500px !important;
-                    width: 1320px;
-                    margin-left: 0em !important;
-                }*/
+                max-width: 1500px !important;
+                width: 1320px;
+                margin-left: 0em !important;
+            }*/
 
         .highlight {
             background-color: yellow;
@@ -30,7 +30,6 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-
                     dataSrc: json => {
                         //console.log(json);
                         if (Array.isArray(json.data)) {
@@ -57,7 +56,6 @@
                         }
                     }
                 },
-
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",

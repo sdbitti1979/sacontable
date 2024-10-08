@@ -215,13 +215,13 @@
                         <div class="col-md-12 mb-3">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" autofocus>
-                            <span id="spnombre" style="color:red"></span>
+                            <span id="spnombre" ></span>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="codigo" class="form-label">Código</label>
                                 <input type="text" id="codigo" name="codigo" class="form-control">
-                                <span id="spcodigo" style="color:red"></span>
+                                <span id="spcodigo" ></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="clasificacion" class="form-label">Clasificación</label>

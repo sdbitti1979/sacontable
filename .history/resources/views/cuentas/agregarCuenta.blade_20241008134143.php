@@ -107,8 +107,6 @@
                     success: function(data){
                         if(data.vacio == false){
                             $("#spnombre").html("La cuenta ya existe");
-                        }else{
-                            $("#spnombre").html("");
                         }
                     }
                 });
@@ -128,11 +126,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data) {
-                        if(data.vacio == false){
-                            $("#spcodigo").html("El código ya existe");
-                        }else{
-                            $("#spcodigo").html("");
-                        }
+                        console.log(data.vacio == true);
                     }
                 });
             });
@@ -215,13 +209,12 @@
                         <div class="col-md-12 mb-3">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" autofocus>
-                            <span id="spnombre" style="color:red"></span>
+                            <span id="spnombre"></span>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="codigo" class="form-label">Código</label>
                                 <input type="text" id="codigo" name="codigo" class="form-control">
-                                <span id="spcodigo" style="color:red"></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="clasificacion" class="form-label">Clasificación</label>

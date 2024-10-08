@@ -68,17 +68,6 @@ class CuentasModel extends Model
         ]);
     }
 
-    public function eliminarCuenta($idcuenta){
-        $pdo = DB::connection()->getPdo();
-
-        $query = "update cuentas set eliminada = 'T' where idcuenta = :param";
-
-        $result = $pdo->prepare($query);
-        $result->bindValue(":param", $idcuenta);
-
-        return $result->execute();
-    }
-
     public function getDataTable($start, $length, $searchValue)
     {
         $pdo = DB::connection()->getPdo();
@@ -138,28 +127,6 @@ class CuentasModel extends Model
                     FROM cuentas c ";
         if (isset($filtro)) {
             $query .= " WHERE upper(c.nombre) = :search";
-        }
-        $stmt = $pdo->prepare($query);
-
-        if (isset($filtro)) {
-            $stmt->bindValue(':search', mb_strtoupper($filtro) , PDO::PARAM_STR);
-        }
-        $stmt->execute();
-
-        $cuentas = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Devolver los datos en formato JSON para DataTables
-        return $cuentas;
-    }
-
-    public function verificarCodigo($filtro){
-
-        $pdo = DB::connection()->getPdo();
-
-        $query = "SELECT c.idcuenta, c.nombre
-                    FROM cuentas c ";
-        if (isset($filtro)) {
-            $query .= " WHERE c.codigo = :search";
         }
         $stmt = $pdo->prepare($query);
 

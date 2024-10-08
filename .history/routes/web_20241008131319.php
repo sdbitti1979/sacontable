@@ -62,8 +62,6 @@ Route::post('/cuentas.guardarCuenta', [CuentasController::class, 'guardarCuenta'
 Route::post('/cuentas.lista', [CuentasController::class, 'lista'])->name('cuentas.lista');
 Route::get('/cuentas.getCuentas', [CuentasController::class, 'getCuentas'])->name('cuentas.getCuentas');
 Route::post('/cuentas.verificarNombre', [CuentasController::class, 'verificarNombre'])->name('cuentas.verificarNombre');
-Route::post('/cuentas.verificarCodigo', [CuentasController::class, 'verificarCodigo'])->name('cuentas.verificarCodigo');
-Route::post('/cuentas.eliminarCuenta', [CuentasController::class, 'destroy'])->name('cuentas.eliminarCuenta');
 
 
 

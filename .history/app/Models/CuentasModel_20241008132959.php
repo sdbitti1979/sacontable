@@ -68,17 +68,6 @@ class CuentasModel extends Model
         ]);
     }
 
-    public function eliminarCuenta($idcuenta){
-        $pdo = DB::connection()->getPdo();
-
-        $query = "update cuentas set eliminada = 'T' where idcuenta = :param";
-
-        $result = $pdo->prepare($query);
-        $result->bindValue(":param", $idcuenta);
-
-        return $result->execute();
-    }
-
     public function getDataTable($start, $length, $searchValue)
     {
         $pdo = DB::connection()->getPdo();
@@ -131,44 +120,50 @@ class CuentasModel extends Model
     }
 
     public function verificarNombre($filtro){
-
         $pdo = DB::connection()->getPdo();
 
-        $query = "SELECT c.idcuenta, c.nombre
-                    FROM cuentas c ";
-        if (isset($filtro)) {
-            $query .= " WHERE upper(c.nombre) = :search";
+        $query = "SELECT c.idcuenta, c.nombre, c.codigo, c.clasificacion_id, cl.nombre as clasificacion,
+                            c.saldo_actual, c.id_padre, COALESCE(c1.nombre, 's/c') as cuenta_padre,
+                            case when c.utilizada = 'F' then 'NO'
+                                 when c.utilizada = 'T' then 'SI'
+                                 else ' '
+                                 end as utilizada,
+                            case when c.eliminada = 'F' then 'NO'
+                                 when c.eliminada = 'T' then 'SI'
+                                 else ' '
+                                 end as eliminada ,
+                            c.modificado, c.solo_admin, c.usuario_id,
+                            case when c.recibe_saldo = 'F' then 'NO'
+                                 when c.recibe_saldo = 'T' then 'Si'
+                                 else ' '
+                                 end as recibe_saldo,
+                            c.nombre_id,
+                            u.usuario
+                    FROM cuentas c
+                    left join usuarios u on (c.usuario_id = u.idusuario)
+                    left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
+                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
+        if (!empty($searchValue)) {
+            $query .= " WHERE upper(c.nombre) LIKE :search OR c.codigo LIKE :search";
         }
+
+        // Agregar la paginación a la consulta
+        $query .= " order by c.idcuenta desc ";
+        $query .= " LIMIT :length OFFSET :start";
+
+
         $stmt = $pdo->prepare($query);
 
-        if (isset($filtro)) {
-            $stmt->bindValue(':search', mb_strtoupper($filtro) , PDO::PARAM_STR);
+        if (!empty($searchValue)) {
+            $stmt->bindValue(':search', '%' . mb_strtoupper($searchValue) . '%', PDO::PARAM_STR);
         }
+        $stmt->bindValue(':length', (int) $length, PDO::PARAM_INT);
+        $stmt->bindValue(':start', (int) $start, PDO::PARAM_INT);
+
         $stmt->execute();
 
-        $cuentas = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Devolver los datos en formato JSON para DataTables
-        return $cuentas;
-    }
-
-    public function verificarCodigo($filtro){
-
-        $pdo = DB::connection()->getPdo();
-
-        $query = "SELECT c.idcuenta, c.nombre
-                    FROM cuentas c ";
-        if (isset($filtro)) {
-            $query .= " WHERE c.codigo = :search";
-        }
-        $stmt = $pdo->prepare($query);
-
-        if (isset($filtro)) {
-            $stmt->bindValue(':search', mb_strtoupper($filtro) , PDO::PARAM_STR);
-        }
-        $stmt->execute();
-
-        $cuentas = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Obtener los resultados en un array asociativo
+        $cuentas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Devolver los datos en formato JSON para DataTables
         return $cuentas;

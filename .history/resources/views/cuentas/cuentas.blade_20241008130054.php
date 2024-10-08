@@ -40,7 +40,7 @@
                                     `<div>${item.usuario}</div>`,
                                     `<div>${item.recibe_saldo}</div>`,
                                     `<div>
-                                    ${item.eliminada == 'NO' && item.utilizada == 'NO'? `<i class="fas fa-trash-alt fa-lg" onclick="eliminarCuenta(${item.idcuenta})"></i>`:``}
+                                    ${item.eliminada == 'F'? `si`:`no`}
                                     </div>`
                                     ];
                             });
@@ -96,31 +96,6 @@
                 }
             });
         }
-
-        function eliminarCuenta(idcuenta){
-            $.ajax({
-                url: "{{ route('cuentas.eliminarCuenta') }}",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF para protección
-                },
-                data:{
-                    idcuenta : idcuenta
-                },
-                success: function(response) {
-
-                    table.ajax.reload();
-                    Swal.fire({
-                        text: response.msg,
-                        icon: response.type,
-                        confirmButtonText: 'Aceptar'
-                    });
-                },
-                error: function(xhr) {
-                    console.error('Error al cargar el modal');
-                }
-            });
-        }
     </script>
 @endsection
 @section('content')
@@ -152,7 +127,7 @@
                                         <th>Eliminada</th>
                                         <th>Usuario</th>
                                         <th>Recibe Saldo</th>
-                                        <th>Eliminar</th>
+                                        <th>Eliminar<th>
                                     </tr>
                                 </thead>
                                 <tbody>

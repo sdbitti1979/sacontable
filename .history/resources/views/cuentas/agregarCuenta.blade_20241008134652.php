@@ -221,7 +221,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="codigo" class="form-label">Código</label>
                                 <input type="text" id="codigo" name="codigo" class="form-control">
-                                <span id="spcodigo" style="color:red"></span>
+                                <span id="spcodigo" ></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="clasificacion" class="form-label">Clasificación</label>

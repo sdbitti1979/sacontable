@@ -66,39 +66,18 @@ class CuentasController extends Controller
     }
 
     public function verificarNombre(Request $request){
-
         $filtro = $request->input('descripcion');
-
         if (empty($filtro)) {
             // Si no hay código, devolver una respuesta vacía
             return response()->json([]);
         }
         $cuentasM = new CuentasModel();
-        $cuentas = $cuentasM->verificarNombre($filtro);
+        $cuentas = $cuentasM->getCuentas($filtro);
 
-        $result = (isset($cuentas) && !empty($cuentas)) ? array("vacio"=> false) : array("vacio"=>true);
-
-        return response()->json($result);
-    }
-
-
-    public function verificarCodigo(Request $request){
-
-        $filtro = $request->input('descripcion');
-
-        if (empty($filtro)) {
-            // Si no hay código, devolver una respuesta vacía
-            return response()->json([]);
-        }
-        $cuentasM = new CuentasModel();
-        $cuentas = $cuentasM->verificarCodigo($filtro);
-
-        $result = (isset($cuentas) && !empty($cuentas)) ? array("vacio"=> false) : array("vacio"=>true);
+        $result = empty($cuentas) ? array("vacio"=> false) : array("vacio"=>true);
 
         return response()->json($result);
     }
-
-
     // Almacenar una nueva cuenta en la base de datos
     public function guardarCuenta(Request $request)
     {
@@ -147,18 +126,12 @@ class CuentasController extends Controller
     }
 
     // Eliminar una cuenta
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->input("idcuenta");
+        $cuenta = CuentasModel::findOrFail($id);
+        $cuenta->delete();
 
-        $cuentasM = new cuentasModel();
-        if($cuentasM->eliminarCuenta($id)){
-            return response()->json(array("type"=>"success", "msg"=>"'Cuenta eliminada con éxito.'"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"'No se pudo eliminar la cuenta.'"));
-        }
-
-
+        return redirect()->route('cuentas.index')->with('success', 'Cuenta eliminada con éxito.');
     }
 
 

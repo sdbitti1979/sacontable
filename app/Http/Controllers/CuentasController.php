@@ -33,6 +33,18 @@ class CuentasController extends Controller
         return view('cuentas.agregarCuenta', $data);
     }
 
+    public function editarCuenta(Request $request){
+        $idcuenta = $request->input("idcuenta");
+        $cuentasM = new CuentasModel();
+
+        $datos = $cuentasM->getCuentaById($idcuenta);
+        
+        $catClasificacionM = new ClasificacionesModel();
+        $data = array("clasificaciones" => $catClasificacionM->getClasificaciones(), "datos"=> $datos);
+
+        return view('cuentas.editarCuenta', $data);
+    }
+
     public function getCatNombres(Request $request)
     {
         $nombre = $request->only("nombre");
@@ -168,9 +180,11 @@ class CuentasController extends Controller
         $start = $request->input('start', 0);  // Desplazamiento (inicio de los datos)
         $length = $request->input('length', 10);  // Número de registros a mostrar por página
         $searchValue = $request->input('search')['value'];
+        $solapa = $request->input('solapa');
+      
         // Llamar al método getDataTable del modelo para obtener los datos
         $cuentasM = new CuentasModel();
-        $cuentas = $cuentasM->getDataTable($start, $length, $searchValue);
+        $cuentas = $cuentasM->getDataTable($start, $length, $searchValue, $solapa);
         $totalRecords = $cuentasM->getTotalRecords();
         $totalFilteredRecords = $cuentasM->getFilteredRecords($searchValue, $totalRecords);
 

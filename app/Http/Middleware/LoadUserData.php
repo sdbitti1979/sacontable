@@ -13,7 +13,7 @@ class LoadUserData
         
         if (Auth::check()) {
             $user = new Usuario();
-            var_dump("entro al handle");
+            //var_dump("entro al handle");
             $roles = $user->roles();
             $permissions = $user->permisos();
 

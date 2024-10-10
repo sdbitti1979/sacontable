@@ -79,7 +79,7 @@ class CuentasModel extends Model
         return $result->execute();
     }
 
-    public function getDataTable($start, $length, $searchValue)
+    public function getDataTable($start, $length, $searchValue, $solapa)
     {
         $pdo = DB::connection()->getPdo();
 
@@ -103,16 +103,25 @@ class CuentasModel extends Model
                     FROM cuentas c
                     left join usuarios u on (c.usuario_id = u.idusuario)
                     left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
-                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
+                    left join cuentas c1 on (c1.idcuenta = c.id_padre)
+                    where 1=1 ";
         if (!empty($searchValue)) {
-            $query .= " WHERE upper(c.nombre) LIKE :search OR c.codigo LIKE :search";
+            $query .= " and upper(c.nombre) LIKE :search OR c.codigo LIKE :search";
+        }
+        
+        if(isset($solapa)){
+            if($solapa == 'activas'){
+                $query .= " and c.eliminada = 'F' ";
+            }elseif($solapa == 'inactivas'){
+                $query .= " and c.eliminada = 'T' ";
+            }
         }
 
         // Agregar la paginación a la consulta
         $query .= " order by c.idcuenta desc ";
         $query .= " LIMIT :length OFFSET :start";
 
-
+       
         $stmt = $pdo->prepare($query);
 
         if (!empty($searchValue)) {
@@ -124,10 +133,8 @@ class CuentasModel extends Model
         $stmt->execute();
 
         // Obtener los resultados en un array asociativo
-        $cuentas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Devolver los datos en formato JSON para DataTables
-        return $cuentas;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
     }
 
     public function verificarNombre($filtro){
@@ -233,8 +240,40 @@ class CuentasModel extends Model
             $stmtTotal->bindValue(":param", mb_strtoupper($filtro) ."%");
         }
         $stmtTotal->execute();
-        $result = $stmtTotal->fetchall(PDO::FETCH_ASSOC);
+        return $stmtTotal->fetchall(PDO::FETCH_ASSOC);
+    }
 
-        return $result;
+    public function getCuentaById($idcuenta){
+        $pdo = DB::connection()->getPdo();
+
+        $query = "SELECT c.idcuenta, c.nombre, c.codigo, c.clasificacion_id, c.clasificacion_id, cl.nombre as clasificacion,
+                            c.saldo_actual, c.id_padre, COALESCE(c1.nombre, 's/c') as cuenta_padre,
+                            case when c.utilizada = 'F' then 'NO'
+                                 when c.utilizada = 'T' then 'SI'
+                                 else ' '
+                                 end as utilizada,
+                            case when c.eliminada = 'F' then 'NO'
+                                 when c.eliminada = 'T' then 'SI'
+                                 else ' '
+                                 end as eliminada ,
+                            c.modificado, c.solo_admin, c.usuario_id,
+                            case when c.recibe_saldo = 'F' then 'NO'
+                                 when c.recibe_saldo = 'T' then 'SI'
+                                 else ' '
+                                 end as recibe_saldo,
+                            c.nombre_id,
+                            u.usuario
+                    FROM cuentas c
+                    left join usuarios u on (c.usuario_id = u.idusuario)
+                    left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
+                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
+        $query .= " where c.idcuenta = :param ";
+        $result = $pdo->prepare($query);
+        $result->bindValue(":param", $idcuenta);
+
+        $result->execute();
+
+        return $result->fetch(PDO::FETCH_ASSOC);
+
     }
 }

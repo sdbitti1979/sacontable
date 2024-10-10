@@ -64,6 +64,7 @@ Route::get('/cuentas.getCuentas', [CuentasController::class, 'getCuentas'])->nam
 Route::post('/cuentas.verificarNombre', [CuentasController::class, 'verificarNombre'])->name('cuentas.verificarNombre');
 Route::post('/cuentas.verificarCodigo', [CuentasController::class, 'verificarCodigo'])->name('cuentas.verificarCodigo');
 Route::post('/cuentas.eliminarCuenta', [CuentasController::class, 'destroy'])->name('cuentas.eliminarCuenta');
+Route::post('/cuentas.editarCuenta', [CuentasController::class, 'editarCuenta'])->name('cuentas.editarCuenta');
 
 
 

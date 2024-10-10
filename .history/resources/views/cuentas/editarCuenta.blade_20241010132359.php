@@ -270,7 +270,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="cerrarModal('ajaxModalCuentas')">Cerrar</button>
-                    @if (in_array('CUENTAS.MODIFICAR', $permissions ?? []))
+                    @if (in_array('CUENTAS.CREAR', $permissions ?? []))
                         <button type="button" class="btn btn-primary" onclick="guardarCuenta()">Guardar cambios</button>
                     @endif
                 </div>

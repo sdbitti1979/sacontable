@@ -334,30 +334,4 @@ class CuentasModel extends Model
 
         return $result->fetch(PDO::FETCH_ASSOC);
     }
-
-    // Relación con cuenta padre
-    public function cuentaPadre()
-    {
-        return $this->belongsTo(CuentasModel::class, 'id_padre');
-    }
-
-    // Relación con cuentas hijas
-    public function cuentasHijas()
-    {
-        return $this->hasMany(CuentasModel::class, 'id_padre');
-    }
-
-    public function tienePadre($idCuenta)
-    {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        return $cuenta->cuentaPadre;
-    }
-
-    public function tieneHijos($idCuenta) {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        // Verificar si una cuenta tiene cuentas hijas
-        return $cuenta->cuentasHijas()->exists();
-    }
 }

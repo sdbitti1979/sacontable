@@ -351,13 +351,10 @@ class CuentasModel extends Model
     {
         $cuenta = CuentasModel::find($idCuenta);
 
-        return $cuenta->cuentaPadre;
-    }
-
-    public function tieneHijos($idCuenta) {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        // Verificar si una cuenta tiene cuentas hijas
-        return $cuenta->cuentasHijas()->exists();
+        if ($cuenta->cuentaPadre) {
+            echo "La cuenta es hija de otra cuenta.";
+        } else {
+            echo "La cuenta no tiene cuenta padre.";
+        }
     }
 }

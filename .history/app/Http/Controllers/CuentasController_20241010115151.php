@@ -133,50 +133,7 @@ class CuentasController extends Controller
         // return redirect()->route('cuentas.index')->with('success', 'Cuenta creada con éxito.');
     }
 
-    public function cuentaUtilizada(Request $request){
-        $idcuenta = $request->input("idcuenta");
-        $cuentasM = new CuentasModel();
-        $cuentaUtilizada = $cuentasM->cuentaUtilizada($idcuenta);
-
-        if($cuentasM->tienePadre($idcuenta) && $cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre y cuentas hijas"));
-        }elseif($cuentasM->tienePadre($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre"));
-        }elseif($cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuentas hijas"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"Ok"));
-        }
-    }
-
     public function actualizarCuenta(Request $request){
-        $validated = $request->validate([
-            'idcuenta' => 'required|int',
-            'nombre' => 'required|string|max:255',
-            'catnombre' => 'required|int',
-            'codigo' => 'required|string|max:255',
-            'clasificacion' => 'nullable|exists:clasificaciones,idclasificacion',
-            'saldoActual' => 'nullable|numeric',
-            'cuentaPadre' => 'nullable|exists:cuentas,idcuenta',
-            'recibeSaldo' => 'required|string|max:1',
-        ]);
-
-        $cuentasM = new CuentasModel();
-
-        $datos = $cuentasM->getCuentaById($validated["idcuenta"]);
-        $cuentaUtilizada = $cuentasM->cuentaUtilizada($validated["idcuenta"]);
-
-        $validated["utilizada"] = ($cuentaUtilizada["cantidad"]== 0? 'F' : 'T');
-        $validated["modificada"] = 'T';
-        $validated["eliminada"] = 'F';
-        $user = $request->user();
-        $validated['usuario_id'] = $user->idusuario ?? null;
-
-        if($cuentasM->actualizarCuenta($validated)){
-            return response()->json(array("type"=>"success", "msg"=>"'Cuenta actualizada con éxito.'"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"'No se pudo actualizar la cuenta.'"));
-        }
 
     }
 

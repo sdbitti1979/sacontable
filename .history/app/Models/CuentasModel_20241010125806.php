@@ -347,17 +347,5 @@ class CuentasModel extends Model
         return $this->hasMany(CuentasModel::class, 'id_padre');
     }
 
-    public function tienePadre($idCuenta)
-    {
-        $cuenta = CuentasModel::find($idCuenta);
 
-        return $cuenta->cuentaPadre;
-    }
-
-    public function tieneHijos($idCuenta) {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        // Verificar si una cuenta tiene cuentas hijas
-        return $cuenta->cuentasHijas()->exists();
-    }
 }

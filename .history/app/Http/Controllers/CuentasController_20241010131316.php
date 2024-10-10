@@ -144,8 +144,6 @@ class CuentasController extends Controller
             return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre"));
         }elseif($cuentasM->tieneHijos($idcuenta)){
             return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuentas hijas"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"Ok"));
         }
     }
 

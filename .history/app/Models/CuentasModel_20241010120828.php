@@ -63,69 +63,35 @@ class CuentasModel extends Model
             'utilizada' => 'F',
             'eliminada' => 'F',
             'modificado' => 'F',
-            'solo_admin' => 'T',
+            'solo_admin' => 'F',
             'usuario_id' => $validated["usuario_id"]  // Relacionar con el catálogo de nombres
         ]);
     }
 
-    public function actualizarCuenta($validated)
-    {
-
-
-        $query = "UPDATE cuentas
-                SET nombre = :pnombre,
-                    codigo = :pcodigo,
-                    clasificacion_id = :pclasificacion,
-                    saldo_actual = :psaldo_actual,
-                    id_padre = :pcuenta_padre,
-                    utilizada = :putilizada,
-                    eliminada = :peliminada,
-                    modificado = :pmodificado,
-                    solo_admin = :psoloadministrador,
-                    usuario_id = :pusuario,
-                    recibe_saldo = :precibe_saldo,
-                    nombre_id = :pnombre_id
-                WHERE idcuenta = :pidcuenta";
+    public function actualizarCuenta($validated){
+        $query = "UPDATE public.cuentas
+                SET nombre=':pnombre',
+                    codigo=':pcodigo',
+                    clasificacion_id=':pclasificacion',
+                    saldo_actual=':saldo_actual',
+                    id_padre=':psaldo_actual',
+                    utilizada=':putilizada',
+                    eliminada=':peliminada',
+                    modificado=':pmodificado',
+                    solo_admin=':psoloadministrador',
+                    usuario_id=':pusuario',
+                    recibe_saldo=':precibe_saldo',
+                    nombre_id=':pnombre_id'
+                WHERE idcuenta=:pidcuenta";
 
         $pdo = DB::connection()->getPdo();
         $result = $pdo->prepare($query);
-
-
-        $result->bindValue(":pnombre", $validated["nombre"]);
-        $result->bindValue(":pnombre_id", $validated["catnombre"]);
-        $result->bindValue(":pcodigo", $validated["codigo"]);
-        $result->bindValue(":pclasificacion", $validated["clasificacion"]);
-        $result->bindValue(":psaldo_actual", $validated["saldoActual"]);
-        $result->bindValue(":pcuenta_padre", $validated["cuentaPadre"]);
-        $result->bindValue(":putilizada", $validated["utilizada"]);
-        $result->bindValue(":peliminada", $validated["eliminada"]);
-        $result->bindValue(":pmodificado", $validated["modificada"]);
-        $result->bindValue(":psoloadministrador", 'T');
-        $result->bindValue(":pusuario", $validated["usuario_id"]);
-        $result->bindValue(":precibe_saldo", $validated["recibeSaldo"]);
-
         $result->bindValue(":pidcuenta", $validated["idcuenta"]);
-
 
         return $result->execute();
     }
 
-    public function cuentaUtilizada($idcuenta)
-    {
-        $query = "SELECT count(idasientocuenta) as cantidad
-                    FROM public.asiento_cuenta ac
-                    where ac.cuenta_id = :picuenta ";
-        $pdo = DB::connection()->getPdo();
-        $result = $pdo->prepare($query);
-        $result->bindValue(":picuenta", $idcuenta);
-
-        $result->execute();
-
-        return $result->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function eliminarCuenta($idcuenta)
-    {
+    public function eliminarCuenta($idcuenta){
         $pdo = DB::connection()->getPdo();
 
         $query = "update cuentas set eliminada = 'T' where idcuenta = :param";
@@ -166,10 +132,10 @@ class CuentasModel extends Model
             $query .= " and upper(c.nombre) LIKE :search OR c.codigo LIKE :search";
         }
 
-        if (isset($solapa)) {
-            if ($solapa == 'activas') {
+        if(isset($solapa)){
+            if($solapa == 'activas'){
                 $query .= " and c.eliminada = 'F' ";
-            } elseif ($solapa == 'inactivas') {
+            }elseif($solapa == 'inactivas'){
                 $query .= " and c.eliminada = 'T' ";
             }
         }
@@ -191,10 +157,10 @@ class CuentasModel extends Model
 
         // Obtener los resultados en un array asociativo
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
-    public function verificarNombre($filtro)
-    {
+    public function verificarNombre($filtro){
 
         $pdo = DB::connection()->getPdo();
 
@@ -206,7 +172,7 @@ class CuentasModel extends Model
         $stmt = $pdo->prepare($query);
 
         if (isset($filtro)) {
-            $stmt->bindValue(':search', mb_strtoupper($filtro), PDO::PARAM_STR);
+            $stmt->bindValue(':search', mb_strtoupper($filtro) , PDO::PARAM_STR);
         }
         $stmt->execute();
 
@@ -216,20 +182,19 @@ class CuentasModel extends Model
         return $cuentas;
     }
 
-    public function verificarCodigo($filtro)
-    {
+    public function verificarCodigo($filtro){
 
         $pdo = DB::connection()->getPdo();
 
         $query = "SELECT c.idcuenta, c.nombre
                     FROM cuentas c ";
         if (isset($filtro)) {
-            $query .= " WHERE c.codigo = :search and c.eliminada = 'F' ";
+            $query .= " WHERE c.codigo = :search and c.eliminada = 'F' " ;
         }
         $stmt = $pdo->prepare($query);
 
         if (isset($filtro)) {
-            $stmt->bindValue(':search', mb_strtoupper($filtro), PDO::PARAM_STR);
+            $stmt->bindValue(':search', mb_strtoupper($filtro) , PDO::PARAM_STR);
         }
         $stmt->execute();
 
@@ -288,21 +253,20 @@ class CuentasModel extends Model
                     left join usuarios u on (c.usuario_id = u.idusuario)
                     left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
                     left join cuentas c1 on (c1.idcuenta = c.id_padre)";
-        if (isset($filtro)) {
+        if(isset($filtro)){
             $query .= " where upper(c.nombre) like :param ";
         }
         $pdo = DB::connection()->getPdo();
         $stmtTotal = $pdo->prepare($query);
 
-        if (isset($filtro)) {
-            $stmtTotal->bindValue(":param", mb_strtoupper($filtro) . "%");
+        if(isset($filtro)){
+            $stmtTotal->bindValue(":param", mb_strtoupper($filtro) ."%");
         }
         $stmtTotal->execute();
         return $stmtTotal->fetchall(PDO::FETCH_ASSOC);
     }
 
-    public function getCuentaById($idcuenta)
-    {
+    public function getCuentaById($idcuenta){
         $pdo = DB::connection()->getPdo();
 
         $query = "SELECT c.idcuenta, c.nombre, c.codigo, c.clasificacion_id, c.clasificacion_id, cl.nombre as clasificacion,
@@ -333,31 +297,6 @@ class CuentasModel extends Model
         $result->execute();
 
         return $result->fetch(PDO::FETCH_ASSOC);
-    }
 
-    // Relación con cuenta padre
-    public function cuentaPadre()
-    {
-        return $this->belongsTo(CuentasModel::class, 'id_padre');
-    }
-
-    // Relación con cuentas hijas
-    public function cuentasHijas()
-    {
-        return $this->hasMany(CuentasModel::class, 'id_padre');
-    }
-
-    public function tienePadre($idCuenta)
-    {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        return $cuenta->cuentaPadre;
-    }
-
-    public function tieneHijos($idCuenta) {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        // Verificar si una cuenta tiene cuentas hijas
-        return $cuenta->cuentasHijas()->exists();
     }
 }

@@ -133,22 +133,6 @@ class CuentasController extends Controller
         // return redirect()->route('cuentas.index')->with('success', 'Cuenta creada con éxito.');
     }
 
-    public function cuentaUtilizada(Request $request){
-        $idcuenta = $request->input("idcuenta");
-        $cuentasM = new CuentasModel();
-        $cuentaUtilizada = $cuentasM->cuentaUtilizada($idcuenta);
-
-        if($cuentasM->tienePadre($idcuenta) && $cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre y cuentas hijas"));
-        }elseif($cuentasM->tienePadre($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre"));
-        }elseif($cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuentas hijas"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"Ok"));
-        }
-    }
-
     public function actualizarCuenta(Request $request){
         $validated = $request->validate([
             'idcuenta' => 'required|int',
@@ -165,12 +149,10 @@ class CuentasController extends Controller
 
         $datos = $cuentasM->getCuentaById($validated["idcuenta"]);
         $cuentaUtilizada = $cuentasM->cuentaUtilizada($validated["idcuenta"]);
-
-        $validated["utilizada"] = ($cuentaUtilizada["cantidad"]== 0? 'F' : 'T');
+        var_dump($cuentaUtilizada);
+        die();
         $validated["modificada"] = 'T';
         $validated["eliminada"] = 'F';
-        $user = $request->user();
-        $validated['usuario_id'] = $user->idusuario ?? null;
 
         if($cuentasM->actualizarCuenta($validated)){
             return response()->json(array("type"=>"success", "msg"=>"'Cuenta actualizada con éxito.'"));

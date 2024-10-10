@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
     <script type="text/javascript">
         var nombre_id = "{{$datos['nombre_id']}}";
-
+        
         $(document).ready(function($) {
             $("#clasificacion").on("change", function() {
                 var nombre = $("#clasificacion :selected").text()
@@ -155,7 +155,6 @@
 
         function guardarCuenta() {
             let data = {
-                idcuenta : "{{ $datos['idcuenta'] }}",
                 nombre: $("#nombre").val(),
                 codigo: $("#codigo").val(),
                 clasificacion: $("#clasificacion").val(),
@@ -165,7 +164,7 @@
                 cuentaPadre: $("#cuentaPadreId").val()
             }
 
-            var url = "{{ route('cuentas.actualizarCuenta') }}";
+            var url = "{{ route('cuentas.guardarCuenta') }}";
 
             $.ajax({
                 url: url,
@@ -269,10 +268,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="cerrarModal('ajaxModalCuentas')">Cerrar</button>
-                    @if (in_array('CUENTAS.MODIFICAR', $permissions ?? []))
-                        <button type="button" class="btn btn-primary" onclick="guardarCuenta()">Guardar cambios</button>
-                    @endif
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="cerrarModal('ajaxModalCuentas')">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarCuenta()">Guardar cambios</button>
                 </div>
             </div>
         </div>

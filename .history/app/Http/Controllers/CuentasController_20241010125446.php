@@ -137,16 +137,6 @@ class CuentasController extends Controller
         $idcuenta = $request->input("idcuenta");
         $cuentasM = new CuentasModel();
         $cuentaUtilizada = $cuentasM->cuentaUtilizada($idcuenta);
-
-        if($cuentasM->tienePadre($idcuenta) && $cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre y cuentas hijas"));
-        }elseif($cuentasM->tienePadre($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuenta padre"));
-        }elseif($cuentasM->tieneHijos($idcuenta)){
-            return response()->json(array("type"=>"error", "msg"=>"La cuenta tiene cuentas hijas"));
-        }else{
-            return response()->json(array("type"=>"success", "msg"=>"Ok"));
-        }
     }
 
     public function actualizarCuenta(Request $request){

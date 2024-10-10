@@ -71,30 +71,31 @@ class CuentasModel extends Model
     public function actualizarCuenta($validated)
     {
 
-
-        $query = "UPDATE cuentas
-                SET nombre = :pnombre,
-                    codigo = :pcodigo,
-                    clasificacion_id = :pclasificacion,
-                    saldo_actual = :psaldo_actual,
-                    id_padre = :pcuenta_padre,
-                    utilizada = :putilizada,
-                    eliminada = :peliminada,
-                    modificado = :pmodificado,
-                    solo_admin = :psoloadministrador,
-                    usuario_id = :pusuario,
-                    recibe_saldo = :precibe_saldo,
-                    nombre_id = :pnombre_id
-                WHERE idcuenta = :pidcuenta";
+        //var_dump($validated);
+        //die();
+        $query = "UPDATE public.cuentas
+                SET nombre=':pnombre',
+                    codigo=':pcodigo',
+                    clasificacion_id=':pclasificacion',
+                    saldo_actual=':psaldo_actual',
+                    id_padre=':pcuenta_padre',
+                    utilizada=':putilizada',
+                    eliminada=':peliminada',
+                    modificado=':pmodificado',
+                    solo_admin=':psoloadministrador',
+                    usuario_id=':pusuario',
+                    recibe_saldo=':precibe_saldo',
+                    nombre_id=':pnombre_id'
+                WHERE idcuenta=:pidcuenta";
 
         $pdo = DB::connection()->getPdo();
         $result = $pdo->prepare($query);
 
-
+        $result->bindValue(":pidcuenta", $validated["idcuenta"]);
         $result->bindValue(":pnombre", $validated["nombre"]);
         $result->bindValue(":pnombre_id", $validated["catnombre"]);
         $result->bindValue(":pcodigo", $validated["codigo"]);
-        $result->bindValue(":pclasificacion", $validated["clasificacion"]);
+        $result->bindValue(":clasificacion_id", $validated["clasificacion"]);
         $result->bindValue(":psaldo_actual", $validated["saldoActual"]);
         $result->bindValue(":pcuenta_padre", $validated["cuentaPadre"]);
         $result->bindValue(":putilizada", $validated["utilizada"]);
@@ -103,8 +104,6 @@ class CuentasModel extends Model
         $result->bindValue(":psoloadministrador", 'T');
         $result->bindValue(":pusuario", $validated["usuario_id"]);
         $result->bindValue(":precibe_saldo", $validated["recibeSaldo"]);
-
-        $result->bindValue(":pidcuenta", $validated["idcuenta"]);
 
 
         return $result->execute();
@@ -333,31 +332,5 @@ class CuentasModel extends Model
         $result->execute();
 
         return $result->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Relación con cuenta padre
-    public function cuentaPadre()
-    {
-        return $this->belongsTo(CuentasModel::class, 'id_padre');
-    }
-
-    // Relación con cuentas hijas
-    public function cuentasHijas()
-    {
-        return $this->hasMany(CuentasModel::class, 'id_padre');
-    }
-
-    public function tienePadre($idCuenta)
-    {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        return $cuenta->cuentaPadre;
-    }
-
-    public function tieneHijos($idCuenta) {
-        $cuenta = CuentasModel::find($idCuenta);
-
-        // Verificar si una cuenta tiene cuentas hijas
-        return $cuenta->cuentasHijas()->exists();
     }
 }

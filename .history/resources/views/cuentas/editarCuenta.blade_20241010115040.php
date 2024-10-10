@@ -165,7 +165,7 @@
                 cuentaPadre: $("#cuentaPadreId").val()
             }
 
-            var url = "{{ route('cuentas.actualizarCuenta') }}";
+            var url = "{{ route('cuentas.guardarCuenta') }}";
 
             $.ajax({
                 url: url,
@@ -269,10 +269,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="cerrarModal('ajaxModalCuentas')">Cerrar</button>
-                    @if (in_array('CUENTAS.MODIFICAR', $permissions ?? []))
-                        <button type="button" class="btn btn-primary" onclick="guardarCuenta()">Guardar cambios</button>
-                    @endif
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="cerrarModal('ajaxModalCuentas')">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarCuenta()">Guardar cambios</button>
                 </div>
             </div>
         </div>

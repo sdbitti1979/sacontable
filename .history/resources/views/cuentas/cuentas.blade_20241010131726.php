@@ -2,10 +2,10 @@
 @section('style')
     <style>
         /*.container-xxl{
-                                    max-width: 1500px !important;
-                                    width: 1320px;
-                                    margin-left: 0em !important;
-                                }*/
+                            max-width: 1500px !important;
+                            width: 1320px;
+                            margin-left: 0em !important;
+                        }*/
 
         .highlight {
             background-color: yellow;
@@ -143,10 +143,6 @@
         }
         // Uso de la función con datos adicionales
         function inicializarDataTableActivas() {
-
-            if ($.fn.DataTable.isDataTable('#cuentas-table')) {
-                $('#cuentas-table').DataTable().destroy();
-            }
             inicializarDataTable(
                 '#cuentas-table',
                 "{{ route('cuentas.lista') }}", {
@@ -156,10 +152,6 @@
         }
 
         function inicializarDataTableInactivas() {
-
-            if ($.fn.DataTable.isDataTable('#cuentas-table')) {
-                $('#cuentas-table-inactivas').DataTable().destroy();
-            }
             inicializarDataTable(
                 '#cuentas-table-inactivas',
                 "{{ route('cuentas.lista') }}", {

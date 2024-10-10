@@ -259,9 +259,9 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="cuentaPadre" class="form-label">Cuenta Padre</label>
-                                <input type="hidden" id="cuentaPadreId" name="cuentaPadreId">
+                                <input type="hidden" id="cuentaPadreId" name="cuentaPadreId" value="{{$datos['id_padre']}}">
                                 <input type="text" id="cuentaPadre" style="position: relative; z-index: 9999;"
-                                    name="cuentaPadre" class="form-control" placeholder="Escribe un nombre...">
+                                    name="cuentaPadre" class="form-control" placeholder="Escribe un nombre..." value="{{$datos['cuenta_padre']}}">
 
                             </div>
                         </div>

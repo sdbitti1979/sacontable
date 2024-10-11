@@ -30,19 +30,4 @@ class ClasificacionesModel extends Model
 
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getClasificacionPorCodigo($codigo){
-
-        $query = "select c.idclasificacion, c.nro_cuenta, c.nombre, c.recibe_saldo, c.tipo
-                        from clasificaciones c
-                        where c.nro_cuenta = :pcodigo
-                        order by c.nombre asc";
-
-        $pdo = DB::connection()->getPdo();
-        $result = $pdo->prepare($query);
-        $result->bindValue(":pcodigo", $codigo);
-        $result->execute();
-
-        return $result->fetch(PDO::FETCH_ASSOC);
-    }
 }

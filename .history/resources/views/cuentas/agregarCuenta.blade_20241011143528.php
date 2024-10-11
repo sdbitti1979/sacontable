@@ -23,22 +23,19 @@
                 this.value = this.value.replace(/[^0-9]/g, '');
             });
 
-            $('.input-moneda').on('keyup', function() {
-                // Permitir solo números y un punto decimal
-                let valor = this.value.replace(/[^0-9.]/g, '');
+            $('.input-moneda').on('input', function() {
+                let valor = this.value.replace(/[^0-9.]/g, ''); // Permite solo números y punto decimal
+                let partes = valor.split('.'); // Separa la parte entera y decimal
 
-                // Asegurar que solo haya un punto decimal
-                let partes = valor.split('.');
+                // Asegura que solo haya una parte decimal
                 if (partes.length > 2) {
-                    valor = partes[0] + '.' + partes[1]; // Mantener solo la primera parte decimal
+                    valor = partes[0] + '.' + partes[1];
                 }
 
-                // Agregar comas como separador de miles solo a la parte entera
+                // Formato de moneda (opcional, agrega comas)
                 let entero = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                let decimal = partes[1] !== undefined ? '.' + partes[1].substring(0, 2) :
-                ''; // Limitar a dos decimales
+                let decimal = partes[1] ? '.' + partes[1].substring(0, 2) : '';
 
-                // Actualizar el valor en el campo de entrada
                 this.value = entero + decimal;
             });
             /*$("#clasificacion").on("change", function() {
@@ -93,8 +90,6 @@
                     success: function(data) {
 
                         $("#clasificacion").val(data["datos"]["nombre"]);
-                        $("#clasificacion_id").val(data["datos"]["idclasificacion"]);
-                        $("#recibeSaldo").val((data["datos"]["recibe_saldo"]==0 ? 'F' : 'T'));
 
                     }
                 });
@@ -148,18 +143,14 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(data) {
-
-                            if(data.length >0 ){
-                                response($.map(data, function(item) {
-                                    return {
-                                        label: item.label,
-                                        value: item.value,
-                                        id: item.id
-                                    };
-                                }));
-                            }else{
-                                $("#cuentaPadre").val("s/c");
-                            }
+                            //console.log(data); // Verifica los datos en la consola
+                            response($.map(data, function(item) {
+                                return {
+                                    label: item.label,
+                                    value: item.value,
+                                    id: item.id
+                                };
+                            }));
                         }
                     });
                 },
@@ -234,9 +225,10 @@
             let data = {
                 nombre: $("#nombre").val(),
                 codigo: $("#codigo").val(),
-                clasificacion: $("#clasificacion_id").val(),
+                clasificacion: $("#clasificacion").val(),
+                catnombre: $("#catnombre").val(),
                 saldoActual: $("#saldoActual").val(),
-                recibeSaldo: $("#recibeSaldo").val(),
+                recibeSaldo: ($("#recibeSaldo").is(':checked') ? 'T' : 'F'),
                 cuentaPadre: $("#cuentaPadreId").val()
             }
 
@@ -290,7 +282,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" id="recibeSaldo" name="recibeSaldo" >
+
                         <div class="col-md-12 mb-3">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" autofocus>
@@ -304,15 +296,13 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="clasificacion" class="form-label">Clasificación</label>
-                                <input type="hidden" id="clasificacion_id" name="clasificacion_id">
                                 <input type="text" id="clasificacion" name="clasificacion" class="form-control" disabled>
                             </div>
 
 
                             <div class="col-md-3 mb-3">
                                 <label for="saldoActual" class="form-label">Saldo Actual</label>
-                                <input type="text" id="saldoActual" name="saldoActual" class="form-control input-moneda"
-                                    placeholder="0.00">
+                                <input type="text" id="saldoActual" name="saldoActual" class="form-control input-moneda">
                             </div>
                         </div>
 

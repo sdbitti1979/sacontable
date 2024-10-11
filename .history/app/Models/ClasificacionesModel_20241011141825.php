@@ -40,7 +40,7 @@ class ClasificacionesModel extends Model
 
         $pdo = DB::connection()->getPdo();
         $result = $pdo->prepare($query);
-        $result->bindValue(":pcodigo", $codigo);
+        $request->bindValue(":pcodigo", $codigo);
         $result->execute();
 
         return $result->fetch(PDO::FETCH_ASSOC);

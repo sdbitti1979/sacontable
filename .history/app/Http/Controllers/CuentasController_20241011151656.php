@@ -130,7 +130,7 @@ class CuentasController extends Controller
         ]);
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'codigo' => 'required|string|max:255',
+            'codigo' => 'required|string|max:255|unique:cuentas,codigo',
             'clasificacion' => 'nullable|exists:clasificaciones,idclasificacion',
             'saldoActual' => 'nullable|numeric',
             'cuentaPadre' => 'nullable|exists:cuentas,idcuenta',

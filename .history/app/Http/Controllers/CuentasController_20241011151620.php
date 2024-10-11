@@ -130,7 +130,7 @@ class CuentasController extends Controller
         ]);
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'codigo' => 'required|string|max:255',
+            'codigo' => 'required|string|max:255|unique:cuentas,codigo',
             'clasificacion' => 'nullable|exists:clasificaciones,idclasificacion',
             'saldoActual' => 'nullable|numeric',
             'cuentaPadre' => 'nullable|exists:cuentas,idcuenta',
@@ -184,7 +184,6 @@ class CuentasController extends Controller
         $validated["utilizada"] = ($cuentaUtilizada["cantidad"]== 0? 'F' : 'T');
         $validated["modificada"] = 'T';
         $validated["eliminada"] = 'F';
-
         $user = $request->user();
         $validated['usuario_id'] = $user->idusuario ?? null;
 

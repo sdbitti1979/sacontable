@@ -80,7 +80,8 @@ class CuentasModel extends Model
                     modificado = :pmodificado,
                     solo_admin = :psoloadministrador,
                     usuario_id = :pusuario,
-                    recibe_saldo = :precibe_saldo
+                    recibe_saldo = :precibe_saldo,
+                    nombre_id = :pnombre_id
                 WHERE idcuenta = :pidcuenta";
 
         $pdo = DB::connection()->getPdo();
@@ -88,6 +89,7 @@ class CuentasModel extends Model
 
 
         $result->bindValue(":pnombre", $validated["nombre"]);
+        $result->bindValue(":pnombre_id", $validated["catnombre"]);
         $result->bindValue(":pcodigo", $validated["codigo"]);
         $result->bindValue(":pclasificacion", $validated["clasificacion"]);
         $result->bindValue(":psaldo_actual", $validated["saldoActual"]);
@@ -280,13 +282,10 @@ class CuentasModel extends Model
                     FROM cuentas c
                     left join usuarios u on (c.usuario_id = u.idusuario)
                     left join clasificaciones cl on (c.clasificacion_id = cl.idclasificacion)
-                    left join cuentas c1 on (c1.idcuenta = c.id_padre)
-                    where 1=1 ";
-
+                    left join cuentas c1 on (c1.idcuenta = c.id_padre)";
         if (isset($filtro)) {
-            $query .= " and upper(c.nombre) like :param ";
+            $query .= " where upper(c.nombre) like :param ";
         }
-        $query .= " and c.eliminada = 'F' ";
         $pdo = DB::connection()->getPdo();
         $stmtTotal = $pdo->prepare($query);
 
@@ -316,6 +315,7 @@ class CuentasModel extends Model
                                  when c.recibe_saldo = 'T' then 'SI'
                                  else ' '
                                  end as recibe_saldo,
+                            c.nombre_id,
                             u.usuario
                     FROM cuentas c
                     left join usuarios u on (c.usuario_id = u.idusuario)

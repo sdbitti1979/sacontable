@@ -213,7 +213,7 @@
                         $('#modalContainer').html(response);
 
                         // Seleccionar el modal de Bootstrap 5
-                        var myModal = new bootstrap.Modal(document.getElementById('ajaxModalUsuarios-edit'));
+                        var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
 
                         // Mostrar el modal
                         myModal.show();

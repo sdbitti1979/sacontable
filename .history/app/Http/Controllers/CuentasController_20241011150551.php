@@ -49,8 +49,8 @@ class CuentasController extends Controller
 
         $datos = $cuentasM->getCuentaById($idcuenta);
 
-        //$catClasificacionM = new ClasificacionesModel();
-        $data = array("datos"=> $datos);
+        $catClasificacionM = new ClasificacionesModel();
+        $data = array("clasificaciones" => $catClasificacionM->getClasificaciones(), "datos"=> $datos);
 
         return view('cuentas.editarCuenta', $data);
     }
@@ -130,7 +130,7 @@ class CuentasController extends Controller
         ]);
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
-            'codigo' => 'required|string|max:255',
+            'codigo' => 'required|string|max:255|unique:cuentas,codigo',
             'clasificacion' => 'nullable|exists:clasificaciones,idclasificacion',
             'saldoActual' => 'nullable|numeric',
             'cuentaPadre' => 'nullable|exists:cuentas,idcuenta',
@@ -163,12 +163,10 @@ class CuentasController extends Controller
     }
 
     public function actualizarCuenta(Request $request){
-        $request->merge([
-            'saldoActual' => str_replace(',', '', $request->input('saldoActual'))
-        ]);
         $validated = $request->validate([
             'idcuenta' => 'required|int',
             'nombre' => 'required|string|max:255',
+            'catnombre' => 'required|int',
             'codigo' => 'required|string|max:255',
             'clasificacion' => 'nullable|exists:clasificaciones,idclasificacion',
             'saldoActual' => 'nullable|numeric',
@@ -178,13 +176,12 @@ class CuentasController extends Controller
 
         $cuentasM = new CuentasModel();
 
-        //$datos = $cuentasM->getCuentaById($validated["idcuenta"]);
+        $datos = $cuentasM->getCuentaById($validated["idcuenta"]);
         $cuentaUtilizada = $cuentasM->cuentaUtilizada($validated["idcuenta"]);
 
         $validated["utilizada"] = ($cuentaUtilizada["cantidad"]== 0? 'F' : 'T');
         $validated["modificada"] = 'T';
         $validated["eliminada"] = 'F';
-
         $user = $request->user();
         $validated['usuario_id'] = $user->idusuario ?? null;
 

@@ -192,7 +192,7 @@
             $('#myTable').on('click', '.edit', function() {
                 var id = $(this).data('id');
                 if (id === undefined) {
-                    //console.error('ID no definido');
+                    console.error('ID no definido');
                     return;
                 }
 
@@ -213,7 +213,7 @@
                         $('#modalContainer').html(response);
 
                         // Seleccionar el modal de Bootstrap 5
-                        var myModal = new bootstrap.Modal(document.getElementById('ajaxModalUsuarios-edit'));
+                        var myModal = new bootstrap.Modal(document.getElementById('ajaxModal'));
 
                         // Mostrar el modal
                         myModal.show();
@@ -320,7 +320,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    cerrarModal('ajaxModalUsuarios-edit');
+                    cerrarModal();
 
 
                 }

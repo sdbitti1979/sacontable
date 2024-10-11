@@ -93,8 +93,6 @@
                     success: function(data) {
 
                         $("#clasificacion").val(data["datos"]["nombre"]);
-                        $("#clasificacion_id").val(data["datos"]["idclasificacion"]);
-                        $("#recibeSaldo").val((data["datos"]["recibe_saldo"]==0 ? 'F' : 'T'));
 
                     }
                 });
@@ -234,9 +232,10 @@
             let data = {
                 nombre: $("#nombre").val(),
                 codigo: $("#codigo").val(),
-                clasificacion: $("#clasificacion_id").val(),
+                clasificacion: $("#clasificacion").val(),
+                catnombre: $("#catnombre").val(),
                 saldoActual: $("#saldoActual").val(),
-                recibeSaldo: $("#recibeSaldo").val(),
+                recibeSaldo: ($("#recibeSaldo").is(':checked') ? 'T' : 'F'),
                 cuentaPadre: $("#cuentaPadreId").val()
             }
 
@@ -290,7 +289,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <input type="hidden" id="recibeSaldo" name="recibeSaldo" >
+
                         <div class="col-md-12 mb-3">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" autofocus>

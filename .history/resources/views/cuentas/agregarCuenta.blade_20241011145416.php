@@ -94,8 +94,6 @@
 
                         $("#clasificacion").val(data["datos"]["nombre"]);
                         $("#clasificacion_id").val(data["datos"]["idclasificacion"]);
-                        $("#recibeSaldo").val((data["datos"]["recibe_saldo"]==0 ? 'F' : 'T'));
-
                     }
                 });
             });
@@ -234,9 +232,9 @@
             let data = {
                 nombre: $("#nombre").val(),
                 codigo: $("#codigo").val(),
-                clasificacion: $("#clasificacion_id").val(),
+                clasificacion: $("#clasificacion").val(),
                 saldoActual: $("#saldoActual").val(),
-                recibeSaldo: $("#recibeSaldo").val(),
+                recibeSaldo: ($("#recibeSaldo").is(':checked') ? 'T' : 'F'),
                 cuentaPadre: $("#cuentaPadreId").val()
             }
 

@@ -94,7 +94,7 @@
 
                         $("#clasificacion").val(data["datos"]["nombre"]);
                         $("#clasificacion_id").val(data["datos"]["idclasificacion"]);
-                        $("#recibeSaldo").val((data["datos"]["recibe_saldo"]==0 ? 'F' : 'T'));
+                        $("#recibe_saldo").val((data["datos"]["recibe_saldo"]==0 ? 'F' : 'T'));
 
                     }
                 });

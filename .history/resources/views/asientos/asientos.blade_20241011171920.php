@@ -19,23 +19,8 @@
                     type: 'post',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    dataSrc: json => {
-                        if (Array.isArray(json.data)) {
-                            return json.data.map(item => {
-                                return [
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.fecha}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.nro_asiento}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.descripcion}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.usuario}</div>`
-                                ];
-                            });
-                        } else {
-                            console.error("La respuesta JSON no contiene un array en el campo 'data'.");
-                            return [];
-                        }
                     }
-                }/*,
+                },
                 columns: [{
                         data: 'fecha',
                         name: 'fecha',
@@ -56,7 +41,7 @@
                         name: 'usuario.usuario',
                         orderable: false
                     } // Columna personalizada para el nombre del usuario
-                ]*/,
+                ],
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",

@@ -24,7 +24,7 @@
                         if (Array.isArray(json.data)) {
                             return json.data.map(item => {
                                 return [
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.fecha}</div>`,
+                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">pepe</div>`,
                                     `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.nro_asiento}</div>`,
                                     `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.descripcion}</div>`,
                                     `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.usuario}</div>`

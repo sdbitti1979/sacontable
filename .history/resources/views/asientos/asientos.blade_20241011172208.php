@@ -24,10 +24,10 @@
                         if (Array.isArray(json.data)) {
                             return json.data.map(item => {
                                 return [
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.fecha}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.nro_asiento}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.descripcion}</div>`,
-                                    `<div onclick="editarCuenta(${item.idasiento})" style="cursor:pointer">${item.usuario}</div>`
+                                    `<div onclick="editarCuenta(${item.idcuenta})" style="cursor:pointer">${item.nombre}</div>`,
+                                    `<div onclick="editarCuenta(${item.idcuenta})" style="cursor:pointer">${item.codigo}</div>`,
+                                    `<div onclick="editarCuenta(${item.idcuenta})" style="cursor:pointer">${item.clasificacion}</div>`,
+                                    `<div onclick="editarCuenta(${item.idcuenta})" style="cursor:pointer">${item.saldo_actual}</div>`
                                 ];
                             });
                         } else {

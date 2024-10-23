@@ -120,15 +120,6 @@
             }
         });*/
 
-        function convertirFechaAFormato(fecha) {
-            const partes = fecha.split('/');
-            // Asegúrate de que esté en el formato "DD/MM/YYYY"
-            if (partes.length === 3) {
-                return `${partes[2]}-${partes[1]}-${partes[0]}`; // Devuelve en formato "YYYY-MM-DD"
-            }
-            return fecha; // Si no se puede dividir bien, retorna la fecha original
-        }
-
         function agregarLinea() {
             // lógica para agregar una nueva fila en la tabla de cuentas
         }
@@ -139,17 +130,15 @@
 
         function guardarAsiento() {
             // Recoger los datos del formulario
-            //const fecha = $('#fechaasiento').val();
+            const fecha = $('#fechaasiento').val();
             const descripcion = $('#descripcionAsiento').val();
             const nroAsiento = $('#nroAsiento').val();
 
-            let fecha = $('#fechaasiento').val();  // Valor de la fecha del input
-            fecha = convertirFechaAFormato(fecha);
             // Recoger los datos de la tabla dinámica
             let cuentas = [];
 
             // Verificar si hay filas en el tbody de la tabla
-            //console.log($('#tablaCuentas tbody tr').length); // Verifica cuántas filas tienes en la tabla
+            console.log($('#tablaCuentas tbody tr').length); // Verifica cuántas filas tienes en la tabla
 
             $('#tablaCuentas tbody tr').each(function() {
                 // Acceder a todas las celdas de la fila
@@ -169,7 +158,7 @@
             });
 
             // Verificar el contenido del array de cuentas
-            //console.log(cuentas);
+            console.log(cuentas);
 
             // Validar que se haya agregado al menos una cuenta
             if (cuentas.length === 0) {
@@ -261,7 +250,14 @@
                 }
             } else {
 
+                // Verificar si el tbody existe, si no, crearlo
+                let tablaCuentas = document.getElementById('tablaCuentas');
+                let tbody = tablaCuentas.querySelector('tbody');
 
+                if (!tbody) {
+                    tbody = document.createElement('tbody');
+                    tablaCuentas.appendChild(tbody); // Agregar el tbody a la tabla
+                }
                 // Crear una nueva fila
                 let fila = document.createElement('tr');
 
@@ -310,10 +306,8 @@
                 fila.appendChild(columnaEliminar);
 
                 // Agregar la fila a la tabla
-                //document.getElementById('tablaCuentas').appendChild(fila);
-                let tablaCuentas = document.getElementById('tablaCuentas');
-                let tbody = tablaCuentas.querySelector('tbody');
-                tbody.appendChild(fila);
+                document.getElementById('tablaCuentas').appendChild(fila);
+                console.log(fila);
             }
 
             // Limpiar los campos
@@ -475,7 +469,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="fechaasiento" class="form-label">Fecha:</label>
-                                <input type="text" id="fechaasiento" class="form-control" disabled value="{{ $fecha }}">
+                                <input type="text" id="fechaasiento" class="form-control" placeholder="__/__/____">
                             </div>
                             <div class="col-md-6">
                                 <label for="nroAsiento" class="form-label">Nro Asiento:</label>
@@ -521,8 +515,8 @@
                             </div>
                             <div class="col-md-6">
                                 <!--<button type="button" class="btn btn-outline-secondary mt-4"
-                                                                                                                                        onclick="agregarLinea()">Agregar cuenta</button>
-                                                                                                                                    <button type="button" class="btn btn-outline-info mt-4">Plan de cuentas</button>-->
+                                                                                                                                    onclick="agregarLinea()">Agregar cuenta</button>
+                                                                                                                                <button type="button" class="btn btn-outline-info mt-4">Plan de cuentas</button>-->
                                 <button id="verificarBalance" class="btn btn-primary mt-2">Verificar Balance</button>
                                 <button type="button" class="btn btn-outline-success mt-4" id="agregarCuenta">Agregar
                                     cuenta</button>
@@ -542,7 +536,6 @@
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
                             </table>
                         </div>
                     </form>

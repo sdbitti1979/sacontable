@@ -128,7 +128,7 @@ class AsientosController extends Controller
 
                 // Registrar el movimiento en la tabla 'asiento_cuenta'
                 AsientoCuentaModel::create([
-                    'asiento_id' => $asientoContable->idasiento,  // Relacionar con el asiento contable
+                    'asiento_id' => $asientoContable->id,  // Relacionar con el asiento contable
                     'cuenta_id' => $cuenta->idcuenta,
                     'debe' => $debe,
                     'haber' => $haber,

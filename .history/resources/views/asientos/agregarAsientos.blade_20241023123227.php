@@ -226,7 +226,7 @@
             return parseFloat(monto.replace(/\./g, '').replace(',', '.'));
         }
 
-        const agregarCuentaBtn = document.getElementById('agregarCuenta');
+        //const agregarCuentaBtn = document.getElementById('agregarCuenta');
         const tablaCuentas = document.getElementById('tablaCuentas');
         const verificarBalanceBtn = document.getElementById('verificarBalance');
 

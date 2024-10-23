@@ -104,7 +104,7 @@ class AsientosController extends Controller
             'cuentas.*.haber' => 'nullable|numeric|min:0',
         ]);
         $user = $request->user();
-        $validatedData['usuario_id'] = $user->idusuario ?? null;
+        $validated['usuario_id'] = $user->idusuario ?? null;
 
         // Iniciar una transacción para asegurar la consistencia
         DB::beginTransaction();
@@ -128,7 +128,7 @@ class AsientosController extends Controller
 
                 // Registrar el movimiento en la tabla 'asiento_cuenta'
                 AsientoCuentaModel::create([
-                    'asiento_id' => $asientoContable->idasiento,  // Relacionar con el asiento contable
+                    'asiento_id' => $asientoContable->id,  // Relacionar con el asiento contable
                     'cuenta_id' => $cuenta->idcuenta,
                     'debe' => $debe,
                     'haber' => $haber,

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\AsientoContableModel;
-use App\Models\AsientoCuentaModel;
 use App\Models\CuentasModel;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Container\Attributes\Auth;
@@ -104,8 +103,9 @@ class AsientosController extends Controller
             'cuentas.*.haber' => 'nullable|numeric|min:0',
         ]);
         $user = $request->user();
-        $validatedData['usuario_id'] = $user->idusuario ?? null;
-
+        $validated['usuario_id'] = $user->idusuario ?? null;
+        var_dump($validatedData);
+        die();
         // Iniciar una transacción para asegurar la consistencia
         DB::beginTransaction();
 
@@ -127,8 +127,8 @@ class AsientosController extends Controller
                 $haber = $cuentaData['haber'] ?? 0;
 
                 // Registrar el movimiento en la tabla 'asiento_cuenta'
-                AsientoCuentaModel::create([
-                    'asiento_id' => $asientoContable->idasiento,  // Relacionar con el asiento contable
+                AsientoCuenta::create([
+                    'asiento_id' => $asientoContable->id,  // Relacionar con el asiento contable
                     'cuenta_id' => $cuenta->idcuenta,
                     'debe' => $debe,
                     'haber' => $haber,

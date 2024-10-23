@@ -63,7 +63,7 @@ class AsientoContableModel extends Model
             $query .= " and upper(ac.descripcion) LIKE :search OR ac.nro_asiento LIKE :search";
         }
         // Agregar la paginación a la consulta
-        $query .= " order by ac.nro_asiento asc ";
+        $query .= " order by ac.idasiento desc ";
         $query .= " LIMIT :length OFFSET :start";
 
         $result = $pdo->prepare($query);

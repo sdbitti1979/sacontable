@@ -54,7 +54,7 @@ class AsientoContableModel extends Model
     {
 
         $pdo = DB::connection()->getPdo();
-        $query = "SELECT ac.idasiento, TO_CHAR(ac.fecha, 'dd/mm/yyyy') as fecha, ac.descripcion, ac.usuario_id, ac.nro_asiento, u.usuario
+        $query = "SELECT ac.idasiento, ac.fecha, ac.descripcion, ac.usuario_id, ac.nro_asiento, u.usuario
                     FROM asientos_contables ac
                     left join usuarios u on (u.idusuario = ac.usuario_id)
                     where 1=1 ";
@@ -63,7 +63,7 @@ class AsientoContableModel extends Model
             $query .= " and upper(ac.descripcion) LIKE :search OR ac.nro_asiento LIKE :search";
         }
         // Agregar la paginación a la consulta
-        $query .= " order by ac.nro_asiento asc ";
+        $query .= " order by ac.idasiento desc ";
         $query .= " LIMIT :length OFFSET :start";
 
         $result = $pdo->prepare($query);

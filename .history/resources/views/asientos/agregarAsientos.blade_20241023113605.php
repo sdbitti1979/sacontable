@@ -139,12 +139,10 @@
 
         function guardarAsiento() {
             // Recoger los datos del formulario
-            //const fecha = $('#fechaasiento').val();
+            const fecha = $('#fechaasiento').val();
             const descripcion = $('#descripcionAsiento').val();
             const nroAsiento = $('#nroAsiento').val();
 
-            let fecha = $('#fechaasiento').val();  // Valor de la fecha del input
-            fecha = convertirFechaAFormato(fecha);
             // Recoger los datos de la tabla dinámica
             let cuentas = [];
 
@@ -475,7 +473,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="fechaasiento" class="form-label">Fecha:</label>
-                                <input type="text" id="fechaasiento" class="form-control" disabled value="{{ $fecha }}">
+                                <input type="text" id="fechaasiento" class="form-control" placeholder="__/__/____">
                             </div>
                             <div class="col-md-6">
                                 <label for="nroAsiento" class="form-label">Nro Asiento:</label>

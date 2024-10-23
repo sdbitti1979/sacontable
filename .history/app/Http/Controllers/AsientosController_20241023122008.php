@@ -117,7 +117,8 @@ class AsientosController extends Controller
                 'usuario_id' => $validatedData['usuario_id'],
                 'nro_asiento' => $validatedData['nro_asiento'],
             ]);
-
+            var_dump($validatedData);
+            die();
             // Recorrer cada cuenta en el request y crear las entradas correspondientes en 'asiento_cuenta'
             foreach ($validatedData['cuentas'] as $cuentaData) {
                 $cuenta = CuentasModel::find($cuentaData['cuenta_id']);
@@ -128,7 +129,7 @@ class AsientosController extends Controller
 
                 // Registrar el movimiento en la tabla 'asiento_cuenta'
                 AsientoCuentaModel::create([
-                    'asiento_id' => $asientoContable->idasiento,  // Relacionar con el asiento contable
+                    'asiento_id' => $asientoContable->id,  // Relacionar con el asiento contable
                     'cuenta_id' => $cuenta->idcuenta,
                     'debe' => $debe,
                     'haber' => $haber,

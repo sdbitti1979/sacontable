@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AsientoContableModel;
-use App\Models\AsientoCuentaModel;
-use App\Models\CuentasModel;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Container\Attributes\Auth;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\DB;
 
 class AsientosController extends Controller
 {
@@ -33,7 +29,7 @@ class AsientosController extends Controller
 
             $asientoM = new AsientoContableModel();
             $siguiente_asiento = $asientoM->getMaxNroAsiento() + 1;
-            $date = date('d/m/Y');
+            $date = new Date();
             $data = array("nro_asiento" => $siguiente_asiento, 'isModal' => true, 'fecha'=> $date);
 
             return view('asientos.agregarAsientos', $data);
@@ -104,14 +100,15 @@ class AsientosController extends Controller
             'cuentas.*.haber' => 'nullable|numeric|min:0',
         ]);
         $user = $request->user();
-        $validatedData['usuario_id'] = $user->idusuario ?? null;
-
+        $validated['usuario_id'] = $user->idusuario ?? null;
+        var_dump($validatedData);
+        die();
         // Iniciar una transacción para asegurar la consistencia
-        DB::beginTransaction();
+        /*DB::beginTransaction();
 
         try {
             // Crear el asiento contable en la tabla 'asientos_contables'
-            $asientoContable = AsientoContableModel::create([
+            $asientoContable = AsientoContable::create([
                 'fecha' => $validatedData['fecha'],
                 'descripcion' => $validatedData['descripcion'],
                 'usuario_id' => $validatedData['usuario_id'],
@@ -120,15 +117,15 @@ class AsientosController extends Controller
 
             // Recorrer cada cuenta en el request y crear las entradas correspondientes en 'asiento_cuenta'
             foreach ($validatedData['cuentas'] as $cuentaData) {
-                $cuenta = CuentasModel::find($cuentaData['cuenta_id']);
+                $cuenta = Cuenta::find($cuentaData['cuenta_id']);
 
                 // Validar que no haya conflictos con "Debe" y "Haber"
                 $debe = $cuentaData['debe'] ?? 0;
                 $haber = $cuentaData['haber'] ?? 0;
 
                 // Registrar el movimiento en la tabla 'asiento_cuenta'
-                AsientoCuentaModel::create([
-                    'asiento_id' => $asientoContable->idasiento,  // Relacionar con el asiento contable
+                AsientoCuenta::create([
+                    'asiento_id' => $asientoContable->id,  // Relacionar con el asiento contable
                     'cuenta_id' => $cuenta->idcuenta,
                     'debe' => $debe,
                     'haber' => $haber,
@@ -155,6 +152,6 @@ class AsientosController extends Controller
                 'error' => 'Ocurrió un error al registrar el asiento contable.',
                 'message' => $e->getMessage(),
             ], 500);
-        }
+        }*/
     }
 }

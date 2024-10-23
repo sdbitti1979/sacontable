@@ -57,7 +57,6 @@ Route::post('/asientos.agregarAsiento', [AsientosController::class, 'agregarAsie
 Route::post('/asientos.detalleAsiento', [AsientosController::class, 'detalleAsiento'])->name('asientos.detalleAsiento');
 Route::post('/asientos.guardarAsiento', [AsientosController::class, 'guardarAsiento'])->name('asientos.guardarAsiento');
 Route::post('/asientos.registrarAsiento', [AsientosController::class, 'registrarAsiento'])->name('asientos.registrarAsiento');
-Route::post('/asientos.getAsiento', [AsientosController::class, 'getAsiento'])->name('asientos.getAsiento');
 
 Route::post('/cuentas.agregarCuenta', [CuentasController::class, 'agregarCuenta'])->name('cuentas.agregarCuenta');
 Route::post('/cuentas.getCatNombres', [CuentasController::class, 'getCatNombres'])->name('cuentas.getCatNombres');

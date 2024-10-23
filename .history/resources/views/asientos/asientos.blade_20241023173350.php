@@ -6,16 +6,6 @@
         var tablaAsientos;
         var myModal;
         $(document).ready(function($) {
-
-            flatpickr("#fecha_inicio", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
-
-            flatpickr("#fecha_fin", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
             // Inicializar DataTable
             tablaAsientos = $('#asientos-table').DataTable({
                 processing: true,
@@ -96,9 +86,7 @@
                 }
             });
 
-            $('#filtrar-fechas').on('click', function() {
-                tablaAsientos.ajax.reload(); // Recargar la tabla con los nuevos parámetros
-            });
+
         });
 
 

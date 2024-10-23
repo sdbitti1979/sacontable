@@ -322,9 +322,6 @@
             document.getElementById('monto').value = '';
             document.getElementById('debe').checked = true;
 
-            tablaAsientos.ajax.reload();
-            cerrarModal('ajaxModalAsientos');
-
         }
 
         // Función para verificar el balance entre "Debe" y "Haber"

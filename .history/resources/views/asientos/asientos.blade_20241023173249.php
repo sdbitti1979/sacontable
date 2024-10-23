@@ -6,16 +6,6 @@
         var tablaAsientos;
         var myModal;
         $(document).ready(function($) {
-
-            flatpickr("#fecha_inicio", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
-
-            flatpickr("#fecha_fin", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
             // Inicializar DataTable
             tablaAsientos = $('#asientos-table').DataTable({
                 processing: true,
@@ -29,11 +19,6 @@
                     type: 'post',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: function(d) {
-                        // Agregar las fechas de filtro a la solicitud AJAX
-                        d.fecha_inicio = $('#fecha_inicio').val();
-                        d.fecha_fin = $('#fecha_fin').val();
                     },
                     dataSrc: json => {
                         if (Array.isArray(json.data)) {
@@ -96,9 +81,7 @@
                 }
             });
 
-            $('#filtrar-fechas').on('click', function() {
-                tablaAsientos.ajax.reload(); // Recargar la tabla con los nuevos parámetros
-            });
+
         });
 
 

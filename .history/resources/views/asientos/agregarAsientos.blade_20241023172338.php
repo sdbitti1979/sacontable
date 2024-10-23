@@ -321,7 +321,6 @@
             document.getElementById('cuentaIn').value = '';
             document.getElementById('monto').value = '';
             document.getElementById('debe').checked = true;
-
             tablaAsientos.ajax.reload();
             cerrarModal('ajaxModalAsientos');
 

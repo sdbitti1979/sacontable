@@ -322,9 +322,6 @@
             document.getElementById('monto').value = '';
             document.getElementById('debe').checked = true;
 
-            tablaAsientos.ajax.reload();
-            cerrarModal('ajaxModalAsientos');
-
         }
 
         // Función para verificar el balance entre "Debe" y "Haber"
@@ -490,46 +487,7 @@
                         <div class="mb-3">
                             <label for="descripcionAsiento" class="form-label">Descripción</label>
                             <textarea class="form-control" id="descripcionAsiento" name="descripcionAsiento"
-                                placeholder="Escribe la descripción del asiento..."></textarea>
-                        </div>
-
-                        <!-- Selección de cuentas -->
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="cuentaSelect" class="form-label">Cuenta</label>
-                                <input type="hidden" id="cuentaId" name="cuentaId">
-                                <input type="text" id="cuentaIn" name="cuenta" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="monto" class="form-label">Monto</label>
-                                <input type="text" id="monto" class="form-control input-moneda" placeholder="Monto">
-                            </div>
-                        </div>
-
-                        <!-- Monto y Tipo (Debe/Haber) -->
-                        <div class="row mb-3">
-
-                            <div class="col-md-6 d-flex align-items-center">
-                                <div class="form-check me-3">
-                                    <input class="form-check-input" type="radio" name="debeHaber" id="debe"
-                                        value="Debe" checked>
-                                    <label class="form-check-label" for="debe">Debe</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="debeHaber" id="haber"
-                                        value="Haber">
-                                    <label class="form-check-label" for="haber">Haber</label>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <!--<button type="button" class="btn btn-outline-secondary mt-4"
-                                                                                                                                        onclick="agregarLinea()">Agregar cuenta</button>
-                                                                                                                                    <button type="button" class="btn btn-outline-info mt-4">Plan de cuentas</button>-->
-                                <button id="verificarBalance" class="btn btn-primary mt-2">Verificar Balance</button>
-                                <button type="button" class="btn btn-outline-success mt-4" id="agregarCuenta">Agregar
-                                    cuenta</button>
-                            </div>
+                                placeholder="Escribe la descripción del asiento..." disabled></textarea>
                         </div>
 
                         <!-- Tabla de cuentas agregadas -->
@@ -541,8 +499,6 @@
                                         <th>Cuenta</th>
                                         <th>Debe</th>
                                         <th>Haber</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -551,9 +507,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="cerrarModal('ajaxModalAsientos')">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardarAsiento()">Registrar asiento</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="cerrarModal('ajaxModalAsientos')">Cerrar</button>
+
                 </div>
             </div>
         </div>

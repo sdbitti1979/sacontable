@@ -3,21 +3,11 @@
 
 @section('script')
     <script type="text/javascript">
-        var tablaAsientos;
+        var table;
         var myModal;
         $(document).ready(function($) {
-
-            flatpickr("#fecha_inicio", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
-
-            flatpickr("#fecha_fin", {
-                dateFormat: "d/m/Y", // Formato de fecha DD/MM/YYYY
-                locale: "es", // Idioma español
-            });
             // Inicializar DataTable
-            tablaAsientos = $('#asientos-table').DataTable({
+            table = $('#asientos-table').DataTable({
                 processing: true,
                 serverSide: true,
                 orderable: false,
@@ -29,11 +19,6 @@
                     type: 'post',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: function(d) {
-                        // Agregar las fechas de filtro a la solicitud AJAX
-                        d.fecha_inicio = $('#fecha_inicio').val();
-                        d.fecha_fin = $('#fecha_fin').val();
                     },
                     dataSrc: json => {
                         if (Array.isArray(json.data)) {
@@ -50,30 +35,28 @@
                             return [];
                         }
                     }
-                }
-                /*,
-                                columns: [{
-                                        data: 'fecha',
-                                        name: 'fecha',
-                                        orderable: false
-                                    },
-                                    {
-                                        data: 'nro_asiento',
-                                        name: 'nro_asiento',
-                                        orderable: false
-                                    },
-                                    {
-                                        data: 'descripcion',
-                                        name: 'descripcion',
-                                        orderable: false
-                                    },
-                                    {
-                                        data: 'usuario_nombre',
-                                        name: 'usuario.usuario',
-                                        orderable: false
-                                    } // Columna personalizada para el nombre del usuario
-                                ]*/
-                ,
+                }/*,
+                columns: [{
+                        data: 'fecha',
+                        name: 'fecha',
+                        orderable: false
+                    },
+                    {
+                        data: 'nro_asiento',
+                        name: 'nro_asiento',
+                        orderable: false
+                    },
+                    {
+                        data: 'descripcion',
+                        name: 'descripcion',
+                        orderable: false
+                    },
+                    {
+                        data: 'usuario_nombre',
+                        name: 'usuario.usuario',
+                        orderable: false
+                    } // Columna personalizada para el nombre del usuario
+                ]*/,
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",
@@ -94,10 +77,6 @@
                         "previous": "Anterior"
                     }
                 }
-            });
-
-            $('#filtrar-fechas').on('click', function() {
-                tablaAsientos.ajax.reload(); // Recargar la tabla con los nuevos parámetros
             });
         });
 
@@ -126,35 +105,8 @@
             });
         }
 
-        function detalleCuenta(id_asiento) {
-            $.ajax({
-                url: "{{ route('asientos.detalleAsiento') }}?modal=true",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF para protección
-                },
-                data: {
-                    id_asiento: id_asiento
-                },
-                success: function(response) {
-                    //console.log(response);
-                    // Cargar el contenido del modal en el contenedor
-                    $('#modalContainer').html(response);
-
-
-                    // Inicializar el modal y mostrarlo
-                    myModal = new bootstrap.Modal(document.getElementById('ajaxModalAsientos'));
-                    //console.log(myModal);
-                    myModal.show();
-                },
-                error: function(xhr) {
-                    console.error('Error al cargar el modal');
-                }
-            });
-        }
-
         setInterval(function() {
-            tablaAsientos.ajax.reload();
+            table.ajax.reload();
         }, 30000);
 
         /*function guardarAsiento() {
@@ -224,19 +176,6 @@
                     <div class="card-body">
                         <div id="modalContainer"></div>
                         <div class="table-responsive">
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="fecha_inicio">Fecha Inicio</label>
-                                    <input type="date" id="fecha_inicio" class="form-control">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="fecha_fin">Fecha Fin</label>
-                                    <input type="date" id="fecha_fin" class="form-control">
-                                </div>
-                                <div class="col-md-4 d-flex align-items-end">
-                                    <button id="filtrar-fechas" class="btn btn-primary">Filtrar</button>
-                                </div>
-                            </div>
                             <table id="asientos-table" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>

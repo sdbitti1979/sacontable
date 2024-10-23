@@ -82,12 +82,10 @@ class AsientosController extends Controller
             $length = $request->input('length', 10);  // Número de registros a mostrar por página
             $searchValue = $request->input('search')['value'];
             $solapa = $request->input('solapa');
-            $fechaInicio = $request->input('fecha_inicio');
-            $fechaFin = $request->input('fecha_fin');
 
             // Llamar al método getDataTable del modelo para obtener los datos
             $asientoM = new AsientoContableModel();
-            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa, $fechaInicio, $fechaFin);
+            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa);
             $totalRecords = $asientoM->getTotalRecords();
             $totalFilteredRecords = $asientoM->getFilteredRecords($searchValue, $totalRecords);
 

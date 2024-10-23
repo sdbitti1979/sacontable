@@ -50,7 +50,7 @@ class AsientoContableModel extends Model
     }
 
     // Método para manejar la respuesta de DataTable
-    public function getDataTable($start, $length, $searchValue, $fechaInicio, $fechaFin)
+    public function getDataTable($start, $length, $searchValue)
     {
 
         $pdo = DB::connection()->getPdo();
@@ -60,10 +60,7 @@ class AsientoContableModel extends Model
                     where 1=1 ";
 
         if (!empty($searchValue)) {
-            $query .= " and upper(ac.descripcion) LIKE :search";
-        }
-        if ($fechaInicio && $fechaFin) {
-            $query .= " and ac.fecha between :finicio and :ffin";
+            $query .= " and upper(ac.descripcion) LIKE :search ";
         }
         // Agregar la paginación a la consulta
         $query .= " order by ac.nro_asiento asc ";
@@ -73,10 +70,6 @@ class AsientoContableModel extends Model
 
         if (!empty($searchValue)) {
             $result->bindValue(':search', '%' . mb_strtoupper($searchValue) . '%', PDO::PARAM_STR);
-        }
-        if ($fechaInicio && $fechaFin) {
-            $result->bindValue(':finicio', $fechaInicio);
-            $result->bindValue(':ffin', $fechaFin);
         }
         $result->bindValue(':length', (int) $length, PDO::PARAM_INT);
         $result->bindValue(':start', (int) $start, PDO::PARAM_INT);
@@ -91,8 +84,8 @@ class AsientoContableModel extends Model
         $totalFilteredRecords = $totalRecords;
         if (!empty($searchValue)) {
             $pdo = DB::connection()->getPdo();
-            $stmtFiltered = $pdo->prepare("SELECT COUNT(*) AS total FROM asientos_contables c WHERE c.descripcion LIKE :search");
-            $stmtFiltered->bindValue(':search', '%' . mb_strtoupper($searchValue) . '%', PDO::PARAM_STR);
+            $stmtFiltered = $pdo->prepare("SELECT COUNT(*) AS total FROM asientos_contables c WHERE c.descripcion LIKE :search OR c.nro_asiento LIKE :search");
+            $stmtFiltered->bindValue(':search', '%' . $searchValue . '%', PDO::PARAM_STR);
             $stmtFiltered->execute();
             $totalFilteredRecords = $stmtFiltered->fetch(PDO::FETCH_ASSOC)['total'];
         }

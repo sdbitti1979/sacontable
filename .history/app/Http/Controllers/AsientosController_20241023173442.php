@@ -87,7 +87,7 @@ class AsientosController extends Controller
 
             // Llamar al método getDataTable del modelo para obtener los datos
             $asientoM = new AsientoContableModel();
-            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa, $fechaInicio, $fechaFin);
+            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa);
             $totalRecords = $asientoM->getTotalRecords();
             $totalFilteredRecords = $asientoM->getFilteredRecords($searchValue, $totalRecords);
 

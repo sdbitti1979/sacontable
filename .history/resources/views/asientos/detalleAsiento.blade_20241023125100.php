@@ -322,9 +322,6 @@
             document.getElementById('monto').value = '';
             document.getElementById('debe').checked = true;
 
-            tablaAsientos.ajax.reload();
-            cerrarModal('ajaxModalAsientos');
-
         }
 
         // Función para verificar el balance entre "Debe" y "Haber"
@@ -490,7 +487,7 @@
                         <div class="mb-3">
                             <label for="descripcionAsiento" class="form-label">Descripción</label>
                             <textarea class="form-control" id="descripcionAsiento" name="descripcionAsiento"
-                                placeholder="Escribe la descripción del asiento..."></textarea>
+                                placeholder="Escribe la descripción del asiento..." disabled></textarea>
                         </div>
 
                         <!-- Selección de cuentas -->
@@ -498,11 +495,11 @@
                             <div class="col-md-6">
                                 <label for="cuentaSelect" class="form-label">Cuenta</label>
                                 <input type="hidden" id="cuentaId" name="cuentaId">
-                                <input type="text" id="cuentaIn" name="cuenta" class="form-control">
+                                <input type="text" id="cuentaIn" name="cuenta" class="form-control" disabled>
                             </div>
                             <div class="col-md-6">
                                 <label for="monto" class="form-label">Monto</label>
-                                <input type="text" id="monto" class="form-control input-moneda" placeholder="Monto">
+                                <input type="text" id="monto" class="form-control input-moneda" placeholder="Monto" disabled>
                             </div>
                         </div>
 
@@ -541,8 +538,6 @@
                                         <th>Cuenta</th>
                                         <th>Debe</th>
                                         <th>Haber</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -551,9 +546,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="cerrarModal('ajaxModalAsientos')">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardarAsiento()">Registrar asiento</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  onclick="cerrarModal('ajaxModalAsientos')">Cerrar</button>
+
                 </div>
             </div>
         </div>

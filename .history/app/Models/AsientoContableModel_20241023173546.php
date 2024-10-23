@@ -62,9 +62,6 @@ class AsientoContableModel extends Model
         if (!empty($searchValue)) {
             $query .= " and upper(ac.descripcion) LIKE :search";
         }
-        if ($fechaInicio && $fechaFin) {
-            $query .= " and ac.fecha between :finicio and :ffin";
-        }
         // Agregar la paginación a la consulta
         $query .= " order by ac.nro_asiento asc ";
         $query .= " LIMIT :length OFFSET :start";
@@ -73,10 +70,6 @@ class AsientoContableModel extends Model
 
         if (!empty($searchValue)) {
             $result->bindValue(':search', '%' . mb_strtoupper($searchValue) . '%', PDO::PARAM_STR);
-        }
-        if ($fechaInicio && $fechaFin) {
-            $result->bindValue(':finicio', $fechaInicio);
-            $result->bindValue(':ffin', $fechaFin);
         }
         $result->bindValue(':length', (int) $length, PDO::PARAM_INT);
         $result->bindValue(':start', (int) $start, PDO::PARAM_INT);

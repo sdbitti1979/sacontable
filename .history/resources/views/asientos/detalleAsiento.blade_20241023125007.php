@@ -322,9 +322,6 @@
             document.getElementById('monto').value = '';
             document.getElementById('debe').checked = true;
 
-            tablaAsientos.ajax.reload();
-            cerrarModal('ajaxModalAsientos');
-
         }
 
         // Función para verificar el balance entre "Debe" y "Haber"
@@ -490,7 +487,7 @@
                         <div class="mb-3">
                             <label for="descripcionAsiento" class="form-label">Descripción</label>
                             <textarea class="form-control" id="descripcionAsiento" name="descripcionAsiento"
-                                placeholder="Escribe la descripción del asiento..."></textarea>
+                                placeholder="Escribe la descripción del asiento..." disabled></textarea>
                         </div>
 
                         <!-- Selección de cuentas -->
@@ -541,8 +538,6 @@
                                         <th>Cuenta</th>
                                         <th>Debe</th>
                                         <th>Haber</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

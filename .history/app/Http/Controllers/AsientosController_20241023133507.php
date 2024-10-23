@@ -46,30 +46,18 @@ class AsientosController extends Controller
     {
         if ($request->query('modal') === 'true') {
             $id_asiento = $request->input("id_asiento");
-            $data = array('isModal' => true, "asientoId" => $id_asiento);
+            // Recuperar el asiento contable con sus cuentas asociadas
+            $asiento = AsientoContableModel::with('cuentas')->find($id);
+
+            if (!$asiento) {
+                return response()->json(['error' => 'Asiento no encontrado'], 404);
+            }
+            $data = array('isModal' => true, 'id_asiento' => $id_asiento);
 
             return view('asientos.detalleAsiento', $data);
         }
 
         return view('asientos.detalleAsiento', ['isModal' => false]);
-    }
-
-    public function getAsiento(Request $request)
-    {
-        $id_asiento = $request->input("id_asiento");
-        $asiento = DB::table('asientos_contables')
-            ->join('asiento_cuenta', 'asientos_contables.idasiento', '=', 'asiento_cuenta.asiento_id')
-            ->join('cuentas', 'asiento_cuenta.cuenta_id', '=', 'cuentas.idcuenta')
-            ->where('asientos_contables.idasiento', $id_asiento)
-            ->select('asientos_contables.*', 'cuentas.idcuenta', 'cuentas.nombre', 'asiento_cuenta.debe', 'asiento_cuenta.haber')
-            ->get();
-
-        if ($asiento->isEmpty()) {
-            return response()->json(['error' => 'Asiento no encontrado'], 404);
-        }
-
-
-        return response()->json($asiento);
     }
 
     /**
@@ -82,12 +70,10 @@ class AsientosController extends Controller
             $length = $request->input('length', 10);  // Número de registros a mostrar por página
             $searchValue = $request->input('search')['value'];
             $solapa = $request->input('solapa');
-            $fechaInicio = $request->input('fecha_inicio');
-            $fechaFin = $request->input('fecha_fin');
 
             // Llamar al método getDataTable del modelo para obtener los datos
             $asientoM = new AsientoContableModel();
-            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa, $fechaInicio, $fechaFin);
+            $cuentas = $asientoM->getDataTable($start, $length, $searchValue, $solapa);
             $totalRecords = $asientoM->getTotalRecords();
             $totalFilteredRecords = $asientoM->getFilteredRecords($searchValue, $totalRecords);
 
